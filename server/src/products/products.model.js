@@ -15,6 +15,10 @@ const ProductSchema = new Schema({
     rating:{
         type:Number, default: 0
     },
+    createdAt: {
+        type:Date,
+        default: Date.now
+    },
     author:{
         type: Types.ObjectId, ref: "User", required: true
     }

@@ -1,82 +1,63 @@
 import React from 'react';
-
+import './AboutUs.css'; // Import the external CSS file
 
 const AboutUs = () => {
     return (
-        <section className="py-12 section__container bg-primary-light">
-            <h2 className="text-3xl font-bold text-center text-gray-800 section__header">
-                About Us
-            </h2>
-            <p className="mt-4 mb-12 text-lg text-center text-gray-600 section__subheader">
-                Discover who we are, our values, and what drives us to bring you the best in women's fashion.
+        <section className="about-us">
+            <h2>About Us</h2>
+            <p>
+                Learn more about our journey, values, and commitment to delivering the best in women’s fashion.
             </p>
-                <div>
-                    <h3 className="mb-4 text-xl font-semibold text-center text-gray-800">
-                        Our Story
-                    </h3>
-                    <p className="leading-relaxed text-gray-700">
-                        At our core, we are a team of fashion enthusiasts dedicated to providing chic, high-quality women's fashion. Our journey began with a vision to create a space where style meets substance, offering products that not only look great but also make you feel confident.
-                    </p>
-                    <p className="mt-4 leading-relaxed text-gray-700">
-                        We believe in sustainability, ethical sourcing, and empowering individuals to express their uniqueness through fashion. From elegant dresses to versatile accessories, every piece is chosen with care and love.
+
+            <div>
+                <h3 className="our-story-title">Our Story</h3>
+                <p className="our-story">
+                    Our journey began with a dream: to redefine women’s fashion by blending timeless elegance with modern trends. We're passionate about offering our customers the highest-quality apparel while staying true to our commitment to sustainability and ethical sourcing.
+                </p>
+            </div>
+
+            {/* Featured Collections */}
+            <div className="featured-collections">
+                <div className="collection-card card-dresses">
+                    <h4>Dresses</h4>
+                    <p>
+                        Explore our elegant collection of dresses for all occasions. Whether you're looking for casual, formal, or evening wear, we have something for every style.
                     </p>
                 </div>
 
-            {/* Team Section */}
-            <div className="px-6 mt-12 about__team lg:px-20">
-                <h3 className="mb-4 text-xl font-semibold text-center text-gray-800">
-                    Meet Our Team
-                </h3>
-                <p className="leading-relaxed text-center text-gray-700">
-                    Behind every product is a dedicated team of designers, stylists, and customer support specialists working tirelessly to bring you the best experience.
-                </p>
-                <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-4">
-                    <div className="text-center">
-                        {/* <img
-                            src={sithija}
-                            alt="Team Member"
-                            className="w-24 h-24 mx-auto rounded-full shadow-lg"
-                        /> */}
-                        <h4 className="mt-4 text-lg font-medium">Sithija</h4>
-                        <p className="text-sm text-gray-600">Creative Director</p>
-                    </div>
-                    <div className="text-center">
-                        {/* <img
-                            src={chamara}
-                            alt="Team Member"
-                            className="w-24 h-24 mx-auto rounded-full shadow-lg"
-                        /> */}
-                        <h4 className="mt-4 text-lg font-medium">Chamara</h4>
-                        <p className="text-sm text-gray-600">Product Manager</p>
-                    </div>
-                    <div className="text-center">
-                        {/* <img
-                            src={shehara}
-                            alt="Team Member"
-                            className="w-24 h-24 mx-auto rounded-full shadow-lg"
-                        /> */}
-                        <h4 className="mt-4 text-lg font-medium">Shehara</h4>
-                        <p className="text-sm text-gray-600">Marketing Lead</p>
-                    </div>
-                    <div className="text-center">
-                        {/* <img
-                            src={anurada}
-                            alt="Team Member"
-                            className="w-24 h-24 mx-auto rounded-full shadow-lg"
-                        /> */}
-                        <h4 className="mt-4 text-lg font-medium">Anuradha</h4>
-                        <p className="text-sm text-gray-600">Support Specialist</p>
-                    </div>
+                <div className="collection-card card-accessories">
+                    <h4>Accessories</h4>
+                    <p>
+                        Discover the perfect accessories to complement your outfit. From stylish handbags to sparkling jewelry, we have everything to complete your look.
+                    </p>
+                </div>
+
+                <div className="collection-card card-shoes">
+                    <h4>Shoes</h4>
+                    <p>
+                        Step into style with our wide selection of fashionable shoes. Whether you're looking for sneakers, heels, or boots, we have the perfect pair for you.
+                    </p>
+                </div>
+
+                <div className="collection-card card-sale">
+                    <h4>Sale</h4>
+                    <p>
+                        Don’t miss out on amazing deals in our ongoing sale section. Get the best discounts on your favorite items before they're gone!
+                    </p>
                 </div>
             </div>
 
-            {/* Vision Section */}
-            <div className="px-6 mt-12 about__vision lg:px-20">
-                <h3 className="mb-4 text-xl font-semibold text-center text-gray-800">
-                    Our Vision
-                </h3>
-                <p className="leading-relaxed text-center text-gray-700">
-                    To become the go-to destination for women’s fashion, combining elegance, innovation, and sustainability. Our goal is to empower our customers to embrace their unique style and shine in every moment.
+            {/* Testimonials Section */}
+            <div className="testimonials">
+                <h3>Customer Testimonials</h3>
+                <p>
+                    "I absolutely love the dresses from this store! The quality is exceptional, and the styles are on-trend. I feel confident every time I wear one of their pieces." – Emily R.
+                </p>
+                <p>
+                    "The customer service is top-notch! I received my order quickly and in perfect condition. I will definitely be shopping here again." – Sarah W.
+                </p>
+                <p>
+                    "Amazing selection and prices! The sale section is always full of great deals. Highly recommend this store!" – Olivia P.
                 </p>
             </div>
         </section>

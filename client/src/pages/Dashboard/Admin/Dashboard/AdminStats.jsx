@@ -1,28 +1,72 @@
 import React from 'react'
+import AdminCard from './AdminCard';
 
 const AdminStats = ({stats})=> {
+
+    const dataEarnings = [
+        { name: 'Page A', value: 100 },
+        { name: 'Page B', value: 300 },
+        { name: 'Page C', value: 800 },
+        { name: 'Page D', value: 200 },
+    ];
+
+    
+    const dataOrders = [
+        { name: 'Page A', value: 1000 },
+        { name: 'Page B', value: 600 },
+        { name: 'Page C', value: 550 },
+        { name: 'Page D', value: 200 },
+    ];
+
+    const dataUsers = [
+        { name: 'Page A', value: 10 },
+        { name: 'Page B', value: 60 },
+        { name: 'Page C', value: 5 },
+        { name: 'Page D', value: 20 },
+    ];
+
+    const dataProducts = [
+        { name: 'Page A', value: 1200 },
+        { name: 'Page B', value: 600 },
+        { name: 'Page C', value: 1800 },
+        { name: 'Page D', value: 200 },
+    ];
+
     console.log(stats);
   return (
     <div className='my-5 space-y-4'>
         <div className='grid gap-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1'>
-            <div className='bg-white shadow-mdrounded-lg p-6 border border-gray-200 hover:scale-105 transition-all duration-200 cursor-pointer'>
-                <h2 className='text-xl font-semibold mb-2'>Total Earnings</h2>
-                <p className='text-2xl font-bold'>{stats?.totalEarnings?.toFixed(2)}</p>
+            <AdminCard
+                            title="Total Earnings"
+                            value={stats?.totalEarnings?.toFixed(2)}
+                            percentage="4.56"
+                            chartData={dataEarnings}
+                            chartColor="#22c55e"
+                        />
+            
+            <AdminCard
+                            title="All Orders"
+                            value={stats?.totalOrders}
+                            percentage="1.73"
+                            chartData={dataOrders}
+                            chartColor="#ff5722"
+                        />
+            
+            <AdminCard
+                            title="All Users"
+                            value={stats?.totalUsers}
+                            percentage="2.08"
+                            chartData={dataUsers}
+                            chartColor="#95989d"
+                        />
 
-            </div>
-
-            <div className='bg-white shadow-mdrounded-lg p-6 border border-gray-200 hover:scale-105 transition-all duration-200 cursor-pointer'>
-                <h2 className='text-xl font-semibold mb-2'>All Orders</h2>
-                <p className='text-2xl font-bold'>{stats?.totalOrders}</p>
-            </div>
-            <div className='bg-white shadow-mdrounded-lg p-6 border border-gray-200 hover:scale-105 transition-all duration-200 cursor-pointer'>
-                <h2 className='text-xl font-semibold mb-2'>All Users</h2>
-                <p className='text-2xl font-bold'>{stats?.totalUsers}</p>
-            </div>
-            <div className='bg-white shadow-mdrounded-lg p-6 border border-gray-200 hover:scale-105 transition-all duration-200 cursor-pointer'>
-                <h2 className='text-xl font-semibold mb-2'>Total Products</h2>
-                <p className='text-2xl font-bold'>{stats?.totalProducts}</p>
-            </div>
+            <AdminCard
+                            title="Total Products"
+                            value={stats?.totalProducts}
+                            percentage="15.79"
+                            chartData={dataProducts}
+                            chartColor="#2275fc"
+                        />
         </div>
     </div>
   )
