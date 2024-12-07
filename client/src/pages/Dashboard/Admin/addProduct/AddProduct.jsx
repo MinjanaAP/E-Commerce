@@ -70,7 +70,7 @@ const AddProduct = () => {
     }
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 p-6">
         <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
         <TextInput

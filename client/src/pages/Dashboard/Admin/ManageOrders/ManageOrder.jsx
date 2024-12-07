@@ -38,7 +38,7 @@ const ManageOrders = () => {
     if (error) return <div>Something went wrong!</div>
 
     return (
-        <div className='section__container p-6'>
+        <div className='section__container'>
             <h2 className='text-2xl font-semibold mb-4'>Manage Orders</h2>
             <table className='min-w-full bg-white border border-gray-200 rounded-lg'>
                 <thead className='bg-gray-100'>
