@@ -22,7 +22,7 @@
     "fashion-house-e-commerce-backend": "file:",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.1",
+    "mongoose": "^8.8.4",
     "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7",
     "stripe": "^17.3.1"
