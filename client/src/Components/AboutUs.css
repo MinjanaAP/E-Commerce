@@ -1,0 +1,130 @@
+/* AboutUs.css */
+
+/* Section Styles */
+.about-us {
+    background-color: #F7EFE7;
+    padding: 3rem 1rem;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.about-us h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.about-us p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* Our Story Section */
+.our-story {
+    color: #555;
+    line-height: 1.5;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.our-story-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Featured Collections */
+.featured-collections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    align-items: stretch;
+}
+
+.collection-card {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 250px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+}
+
+.collection-card h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.collection-card p {
+    font-size: 1rem;
+    color: black;
+    flex-grow: 1;
+}
+
+.card-dresses {
+    background-color: #e9cdfa;
+}
+
+.card-accessories {
+    background-color: #ffc4f1;
+}
+
+.card-shoes {
+    background-color: #cdc0ed;
+}
+
+.card-sale {
+    background-color: #c7eaf0;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+}
+
+.testimonials h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.testimonials p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
