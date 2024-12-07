@@ -13,7 +13,7 @@ const Login = () => {
     const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
     const navigate = useNavigate();
 
-    // Handle login
+    //* Handle login
     const handleLogin = async (e) => {
         e.preventDefault();
         const data = {
@@ -26,7 +26,15 @@ const Login = () => {
             const { token, user } = response;
             dispatch(setUser({ user }));
             alert("Login Successful");
-            navigate('/');
+
+            //? change re-direct url based on user role
+            //console.log(user);
+            if(user.role=="admin"){
+                navigate('/dashboard/admin')
+            }else{
+                navigate('/');
+            }
+
         } catch (error) {
             setMessage("Please provide a valid email and password");
         }

@@ -1,0 +1,11 @@
+# Root-level ignores
+node_modules/
+.env
+
+# Client and Server specific rules (optional redundancy)
+client/node_modules/
+client/build/
+
+server/node_modules/
+server/dist/
+server/.env
