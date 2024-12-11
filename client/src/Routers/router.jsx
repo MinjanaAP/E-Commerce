@@ -62,16 +62,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout/></PrivateRoute>, // TODO: user private routes here
+    element: <PrivateRoute><DashboardLayout/></PrivateRoute>, 
     children: [
-      // user routes
+      //? User routes here
       { path: '', element: <UserDMain /> },
       { path: "orders", element: <UserOrders /> },
       { path: "payments", element: <UserPayments /> },
       { path: "profile", element: <UserProfile /> },
       { path: "reviews", element: <UserReviews /> },
 
-        // admin routes (only accessible by admin) TODO: private routes with role field
+        //? Admin routes here
         { path: "admin", element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute> },
         { path: "add-product", element:<PrivateRoute role="admin"><AddProduct/></PrivateRoute>  },
         { path: "manage-products", element: <PrivateRoute role="admin"><div><ManageProduct/></div></PrivateRoute> },

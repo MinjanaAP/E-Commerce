@@ -24,7 +24,11 @@ const Login = () => {
         try {
             const response = await loginUser(data).unwrap();
             const { token, user } = response;
+
+            //* Set user details to local storage.
             dispatch(setUser({ user }));
+
+            
             alert("Login Successful");
 
             //? change re-direct url based on user role
