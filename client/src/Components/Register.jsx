@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from '../redux/features/auth/authApi';
-import loginImage from "../assets/login_image.jpg"
+import signUpImage from "../assets/signup_image.jpg"
 
 function Register() {
     const [message, setMessage] = useState('');
@@ -49,8 +49,8 @@ function Register() {
             {/* Left Section - Image */}
             <div className="hidden w-2/3 md:block">
                 <img
-                    src={loginImage}
-                    alt="Login image"
+                    src={signUpImage}
+                    alt="sign-up image"
                     className="object-cover w-full h-full"
                 />
             </div>

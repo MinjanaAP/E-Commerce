@@ -2,9 +2,10 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import amex from "../assets/amex-icon.png"
-import gpay from "../assets/google-pay.png"
+import visa from "../assets/visa-icon.png"
 import mastercard from "../assets/mastercard-icon.png"
 import paypal from "../assets/paypal-icon.png"
+import gpay from "../assets/gpay-icon.png"
 
 const Footer = () => {
   return (
@@ -87,9 +88,10 @@ const Footer = () => {
           <p className="text-sm">Copyrights © 2025 by Fashion House.All rights Reserved.</p>
           <div className="flex mt-4 space-x-4 md:mt-0">
             <img src={amex} alt="Amex" className="h-6" />
-            <img src={gpay} alt="Google Pay" className="h-6" />
+            <img src={visa} alt="Visa" className="h-6" />
             <img src={mastercard} alt="MasterCard" className="h-6" />
             <img src={paypal} alt="PayPal" className="h-6" />
+            <img src={gpay} alt="Google pay" className="h-6" />
           </div>
         </div>
       </div>
