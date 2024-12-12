@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('./orders.model');
+const User = require('../users/user.model');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const sendTrackingNumber = require("../utils/sendTrackingNumber");
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY || 'default_secret_key';
 
-// Create checkout session
+//! Create checkout session
 router.post('/create-checkout-session', async (req, res) => {
     const { products} = req.body; // Extract `products` and `userId` from the request body
     try {
@@ -38,23 +39,21 @@ router.post('/create-checkout-session', async (req, res) => {
     }
 });
 
-// Confirm payment
+//! Confirm payment
 router.post('/confirm-payment', async (req, res) => {
     const { session_id } = req.body;
 
-    // Extract token from headers
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ error: 'Authorization token is missing or invalid' });
     }
 
-    const token = authHeader.split(' ')[1]; // Extract the token from "Bearer <token>"
-    let userId;
+    const token = authHeader.split(' ')[1];
 
     try {
-        // Decode the token to extract user email
-        const decoded = jwt.verify(token,JWT_SECRET); // Use your secret key here
-        userId = decoded.userId; // Assuming the email is stored in the token
+        
+        const decoded = jwt.verify(token,JWT_SECRET); 
+        userId = decoded.userId; 
         console.log("Logged user email"+ userId);
         
     } catch (err) {
@@ -62,37 +61,41 @@ router.post('/confirm-payment', async (req, res) => {
         return res.status(403).json({ error: 'Invalid or expired token' });
     }
 
+    const user = await User.findById(userId).select('email');
+    if (!user) {
+        return res.status(401).json({error: 'User email not found.'})
+    }
     try {
-        // Retrieve the session details from Stripe
+        //* stripe session details
         const session = await stripe.checkout.sessions.retrieve(session_id, {
             expand: ['line_items', 'payment_intent'],
         });
 
         const paymentIntentId = session.payment_intent.id;
 
-        // Check if the order already exists in the database
+        //* Check weather orderId is exists in db 
         let order = await Order.findOne({ orderId: paymentIntentId });
 
         if (!order) {
-            // Map Stripe line items to order products
+            
             const lineItems = session.line_items.data.map((item) => ({
-                productId: item.price.product, // Stripe product ID
-                quantity: item.quantity, // Quantity purchased
+                productId: item.price.product, 
+                quantity: item.quantity, 
             }));
 
-            const amount = session.amount_total / 100; // Convert amount from cents to dollars
+            const amount = session.amount_total / 100; 
 
-            // Create a new order with the logged-in user's email
             order = new Order({
                 orderId: paymentIntentId,
                 amount,
                 products: lineItems,
-                userId: userId, // Save the logged-in user's email
+                email: user.email,
+                userId: userId, 
                 status: session.payment_status === "paid" ? 'pending' : 'failed',
             });
 
-            await order.save(); // Save the order to the database
-            sendTrackingNumber(session.customer_details.name, session.customer_details.email, order._id); // Use userEmail
+            await order.save(); 
+            sendTrackingNumber(session.customer_details.name, session.customer_details.email, order._id); 
         }
 
         res.json({ message: "Payment confirmed and order updated", order });
@@ -102,7 +105,7 @@ router.post('/confirm-payment', async (req, res) => {
     }
 });
 
-//get order by email
+//! get order by email
 router.get('/:email', async(req,res)=>{
     const email = req.params.email;
     if(!email){
@@ -121,7 +124,7 @@ router.get('/:email', async(req,res)=>{
     }
 });
 
-//get order by id
+//!get order by id
 router.get('/order/:id', async(req,res)=>{
     try {
         const order = await Order.findById(req.params.id);
@@ -135,7 +138,7 @@ router.get('/order/:id', async(req,res)=>{
     }
 });
 
-// Get all orders
+//! Get all orders
 router.get("/", async (req, res) => {
     try {
         const orders = await Order.find().sort({ createdAt: -1 });
@@ -150,7 +153,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Update order status
+//! Update order status
 router.patch("/update-order-status/:id", async (req, res) => {
     const { id } = req.params; // Extract order ID from URL parameters
     const { status } = req.body; 
@@ -176,7 +179,7 @@ router.patch("/update-order-status/:id", async (req, res) => {
     }
 });
 
-// Delete order
+// !Delete order
 router.delete('/delete-order/:id', async (req, res) => {
     const { id } = req.params;
     try {
