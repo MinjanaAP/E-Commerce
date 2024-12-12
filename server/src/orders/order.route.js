@@ -92,7 +92,7 @@ router.post('/confirm-payment', async (req, res) => {
             });
 
             await order.save(); // Save the order to the database
-            sendTrackingNumber(session.customer_details.name, userId, order._id); // Use userEmail
+            sendTrackingNumber(session.customer_details.name, session.customer_details.email, order._id); // Use userEmail
         }
 
         res.json({ message: "Payment confirmed and order updated", order });
