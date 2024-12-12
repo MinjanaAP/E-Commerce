@@ -11,11 +11,20 @@ const PaymentSuccess = () => {
         const sessionId = query.get('session_id');
         console.log("session Id: " + sessionId);
 
+        //? Get token from session storage
+        const rawToken = sessionStorage.getItem('token');
+        if (!rawToken) {
+            console.error("Token is missing.");
+            return; 
+        }
+        const token = rawToken.replace(/^"(.*)"$/, '$1');
+
         if (sessionId) {
             fetch(`${getBaseUrl()}/api/orders/confirm-payment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ session_id: sessionId }),
             })

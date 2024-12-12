@@ -15,6 +15,15 @@ function OrderSummary() {
 
     // Payment integration
     const makePayment = async (e) => {
+
+        //? Get token from session storage
+        const rawToken = sessionStorage.getItem('token');
+        if (!rawToken) {
+            console.error("Token is missing.");
+            return; 
+        }
+        const token = rawToken.replace(/^"(.*)"$/, '$1');
+
         e.stopPropagation(); // Ensure propagation is stopped for the event
 
         const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
@@ -25,6 +34,7 @@ function OrderSummary() {
 
         const headers = {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         };
 
         try {

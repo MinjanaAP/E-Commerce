@@ -8,7 +8,12 @@ const orderSchema = new Schema({
         }
     ],
     amount: Number,
-    email: {type: String, required: true},
+    email: {type: String},
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
     status:{
         type: String,
         enum: ["pending","processing","shipped","completed"],

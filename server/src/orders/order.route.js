@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Order = require('./orders.model');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const sendTrackingNumber = require("../utils/sendTrackingNumber")
+const sendTrackingNumber = require("../utils/sendTrackingNumber");
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = process.env.JWT_SECRET_KEY || 'default_secret_key';
 
 // Create checkout session
 router.post('/create-checkout-session', async (req, res) => {
@@ -39,31 +42,57 @@ router.post('/create-checkout-session', async (req, res) => {
 router.post('/confirm-payment', async (req, res) => {
     const { session_id } = req.body;
 
+    // Extract token from headers
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authorization token is missing or invalid' });
+    }
+
+    const token = authHeader.split(' ')[1]; // Extract the token from "Bearer <token>"
+    let userId;
+
     try {
+        // Decode the token to extract user email
+        const decoded = jwt.verify(token,JWT_SECRET); // Use your secret key here
+        userId = decoded.userId; // Assuming the email is stored in the token
+        console.log("Logged user email"+ userId);
+        
+    } catch (err) {
+        console.error('Token verification failed:', err);
+        return res.status(403).json({ error: 'Invalid or expired token' });
+    }
+
+    try {
+        // Retrieve the session details from Stripe
         const session = await stripe.checkout.sessions.retrieve(session_id, {
             expand: ['line_items', 'payment_intent'],
         });
 
         const paymentIntentId = session.payment_intent.id;
+
+        // Check if the order already exists in the database
         let order = await Order.findOne({ orderId: paymentIntentId });
 
         if (!order) {
+            // Map Stripe line items to order products
             const lineItems = session.line_items.data.map((item) => ({
-                productId: item.price.product, // Ensure Stripe product ID matches the database
-                quantity: item.quantity,
+                productId: item.price.product, // Stripe product ID
+                quantity: item.quantity, // Quantity purchased
             }));
 
-            const amount = session.amount_total / 100; // Convert amount to dollars
+            const amount = session.amount_total / 100; // Convert amount from cents to dollars
+
+            // Create a new order with the logged-in user's email
             order = new Order({
                 orderId: paymentIntentId,
                 amount,
                 products: lineItems,
-                email: session.customer_details.email, // Retrieve email from session
+                userId: userId, // Save the logged-in user's email
                 status: session.payment_status === "paid" ? 'pending' : 'failed',
             });
-            await order.save(); // Save the order
-             sendTrackingNumber(session.customer_details.name,session.customer_details.email,order._id);
-             
+
+            await order.save(); // Save the order to the database
+            sendTrackingNumber(session.customer_details.name, userId, order._id); // Use userEmail
         }
 
         res.json({ message: "Payment confirmed and order updated", order });
