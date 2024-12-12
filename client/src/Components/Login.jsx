@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../redux/features/auth/authApi";
 import { setUser } from "../redux/features/auth/authSlice";
-import loginImage from "../assets/login_image.jpg"
+import loginImage from "../assets/login_image.jpg";
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [message, setMessage] = useState("");
