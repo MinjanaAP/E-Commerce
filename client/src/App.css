@@ -345,12 +345,10 @@ nav {
 }
 
 .deals__container {
+  display: flex;
   background-color: var(--primary-color-light);
-  border-radius: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
   align-items: center;
+  justify-content: space-between;
 }
 
 .deals__image {
@@ -367,15 +365,43 @@ nav {
 }
 
 .deals__content {
-  max-width: 600px;
-  margin-right: auto;
+  flex: 1;
+  padding: 2rem;
 }
 
-.deals__content h5 {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--primary-color);
+
+.deals__logos {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logos__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
+  gap: 40px; /* Add spacing between the logos */
+  width: 100%;
+  max-width: 300px; /* Optional: Control the grid's width */
+}
+
+.logos__grid img {
+  width: 100%; /* Make logos responsive */
+  height: auto;
+  object-fit: contain; /* Ensure logos maintain aspect ratio */
+  border: 2px solid #ccc; /* Optional: Add border around logos */
+  border-radius: 8px; /* Optional: Rounded corners */
+}
+
+@media (max-width: 768px) {
+  .deals__container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logos__grid {
+    grid-template-columns: repeat(2, 1fr); /* Adjust grid for smaller screens */
+  }
 }
 
 .deals__content h4 {
@@ -394,12 +420,12 @@ nav {
 .deals__countdown {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
 }
 
 .deals__countdown__card {
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 200px;
   display: grid;
   place-content: center;
   text-align: center;
