@@ -36,6 +36,9 @@ const AddProduct = () => {
         description: ''
     });
     const [image, setImage] = useState('');
+    const [image1,setImage1] = useState('');
+    const [image2,setImage2] = useState('');
+    const [image3,setImage3] = useState('');
     const [AddProduct, {isLoading, error}] = useAddProductMutation()
 
     const handleChange = (e) => {
@@ -48,26 +51,32 @@ const AddProduct = () => {
 
     const navigate = useNavigate()
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!product.name || !product.category || !product.price || !product.description || !product.color) {
-            alert('Please fill all the required fields');
-            return;
+        if (!product.name || !product.category || !product.price || !product.description || !product.color || !image || !image1 || !image2 || !image3 ) {
+          alert('Please fill all the required fields and upload both images');
+          return;
         }
         try {
-            await AddProduct({...product, image, author: user?._id}).unwrap();
-            alert('Product added successfully');
-            setProduct({ name: '',
-                category: '',
-                color: '',
-                price: '',
-                description: ''})
-                setImage('');
-                navigate("/shop")
+          await AddProduct({ ...product, image, image1,image2,image3, author: user?._id }).unwrap();
+          alert('Product added successfully');
+          setProduct({
+            name: '',
+            category: '',
+            color: '',
+            price: '',
+            description: '',
+          });
+          setImage('');
+          setImage1('');
+          setImage2('');
+          setImage3('');
+          navigate("/shop");
         } catch (error) {
-            console.log("Failed to submit product", error);
+          console.error("Failed to submit product", error);
         }
-    }
+      };
+      
 
   return (
     <div className="container mx-auto mt-8 p-6">
@@ -108,6 +117,27 @@ const AddProduct = () => {
                 value={e => setImage(e.target.value)}
                 placeholder='Image'
                 setImage={setImage}
+                />
+                <UploadImage
+                name="image"
+                id="image"
+                value={e => setImage1(e.target.value)}
+                placeholder='Image'
+                setImage={setImage1}
+                />
+                <UploadImage
+                name="image"
+                id="image"
+                value={e => setImage2(e.target.value)}
+                placeholder='Image'
+                setImage={setImage2}
+                />
+                <UploadImage
+                name="image"
+                id="image"
+                value={e => setImage3(e.target.value)}
+                placeholder='Image'
+                setImage={setImage3}
                 />
                 <div>
                 <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
