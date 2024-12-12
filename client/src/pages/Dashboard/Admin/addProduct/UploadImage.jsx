@@ -1,42 +1,87 @@
-import React, { useState } from 'react';
+import { getBaseUrl } from "../../../../utils/baseURL";
+import React, { useState } from 'react'
 
-const UploadImage = ({ onImageUpload }) => {
-    const [previewImages, setPreviewImages] = useState([]);
+import axios from 'axios'
 
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
+const UploadImage = ({ name, setImage }) => {
+    const [loading, setLoading] = useState(false);
+    const [url, setUrl] = useState("");
 
-        if (files.length + previewImages.length > 4) {
-            alert('You can upload a maximum of 4 images.');
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
+    // request to upload a file
+    const uploadSingleImage = (base64) => {
+        setLoading(true);
+        axios
+            .post(`${getBaseUrl()}/uploadImage`, { image: base64 })
+            .then((res) => {
+                const imageUrl = res.data;
+                setUrl(imageUrl);
+                // console.log(imageUrl);
+                alert("Image uploaded successfully");
+                setImage(imageUrl); 
+            })
+            .then(() => setLoading(false))
+            .catch((error) => {
+                console.error(error);
+                setLoading(false);
+            });
+    };
+
+    const uploadImage = async (event) => {
+        const files = event.target.files;
+
+        if (files.length === 1) {
+            const base64 = await convertBase64(files[0]);
+            uploadSingleImage(base64);
             return;
         }
 
-        const imageUrls = files.map((file) => {
-            const imageUrl = URL.createObjectURL(file);
-            onImageUpload(imageUrl); // Notify the parent component about the uploaded image
-            return imageUrl;
-        });
+        const base64s = [];
+        for (let i = 0; i < files.length; i++) {
+            const base = await convertBase64(files[i]);
+            base64s.push(base);
+        }
+    }
 
-        setPreviewImages((prev) => [...prev, ...imageUrls]);
-    };
 
     return (
         <div>
-            <label className="block text-sm font-medium text-gray-700">Upload Images</label>
-            <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleFileChange}
-                className="add-product-InputCSS"
-            />
-            <div className="image-preview grid grid-cols-2 gap-2 mt-4">
-                {previewImages.map((src, index) => (
-                    <img key={index} src={src} alt={`Preview ${index + 1}`} className="h-20 w-20 object-cover" />
-                ))}
-            </div>
+            <label htmlFor={name}>Upload Image</label>
+            <input type="file"
+                name={name}
+                id={name}
+                onChange={uploadImage}
+                className='add-product-InputCSS' />
+            {
+                loading && (
+                    <div className='mt-2 text-sm text-blue-600'>Product uploading...</div>
+                )
+            }
+            {
+                url && (
+                    <div className='mt-2 text-sm text-green-600'>
+                        <p>Image uploaded successfully!</p>
+                        <img src={url} alt="uploaded-image" />
+                    </div>
+                )
+            }
         </div>
-    );
-};
+    )
+}
 
-export default UploadImage;
+
+export default UploadImage

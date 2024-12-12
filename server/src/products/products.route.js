@@ -6,33 +6,29 @@ const verifyAdmin = require("../middleware/verifyAdmin");
 const router = express.Router();
 
 //post a product
-router.post('/create-product', async (req, res) => {
+router.post("/create-product", async (req, res) => {
   try {
-      const { name, category, description, price, images, color, author } = req.body;
-
-      if (!images || images.length < 4) {
-          return res.status(400).json({ message: 'At least 4 images are required.' });
-      }
-
-      const newProduct = new Products({
-          name,
-          category,
-          description,
-          price,
-          images,
-          color,
-          author,
-      });
-
-      const savedProduct = await newProduct.save();
-      res.status(201).json(savedProduct);
+    const newProduct = new Products({
+      ...req.body,
+    });
+    const savedProduct = await newProduct.save();
+    // calculate review
+    const reviews = await Reviews.find({ productId: savedProduct._id });
+    if (reviews.length > 0) {
+      const totalRating = reviews.reduce(
+        (acc, reviews) => acc + reviews.rating,
+        0
+      );
+      const averageRating = totalRating / reviews.length;
+      savedProduct.rating = averageRating;
+      await savedProduct.save();
+    }
+    res.status(201).json(savedProduct);
   } catch (error) {
-      console.error('Error creating new product', error);
-      res.status(500).send({ message: 'Failed to create new product' });
+     console.error("Error creating new product", error);
+     res.status(500).send({message: "Failed to create new product"})
   }
 });
-
-
 
 //get all products
 router.get("/", async (req, res) => {

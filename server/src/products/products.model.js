@@ -10,7 +10,7 @@ const ProductSchema = new Schema({
         type:Number, required: true
     },
     oldPrice: Number,
-    images: [String],
+    image: String,
     color: String,
     rating:{
         type:Number, default: 0
