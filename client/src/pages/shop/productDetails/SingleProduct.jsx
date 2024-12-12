@@ -5,6 +5,8 @@ import { useFetchProductByIdQuery } from '../../../redux/features/products/produ
 import RatingStars from '../../../Components/RatingStars';
 import { addToCart } from '../../../redux/features/cart/cartSlice';
 import ReviewsCard  from '../reviews/ReviewsCard';
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 const SingleProduct = () => {
@@ -15,6 +17,13 @@ const SingleProduct = () => {
     
     const singleProduct = data?.product || {};
     const productReviews = data?.reviews || [];
+
+    const images = [
+        `${singleProduct.image}`,
+        `${singleProduct.image1}`,
+        `${singleProduct.image2}`,
+        `${singleProduct.image3}`,
+    ]
 
     const handleAddToCart = (product)=>{
         dispatch(addToCart(product))
@@ -40,16 +49,25 @@ const SingleProduct = () => {
             </section>
 
             <section className='section__container mt-8'>
-                <div className='flex flex-col items-center md:flex-row gap-8'>
+                <div className='flex flex-col items-start md:flex-row gap-8 justify-center'>
                     {/* product image */}
-                    <div className='md:w-1/2 w-full'>
-                        <img src={singleProduct?.image}
+                    <div className='md:w-1/3 w-full'>
+                        {/* <img src={singleProduct?.image}
                             alt=""
-                            className='rounded-md w-full h-auto' />
+                            className='rounded-md w-full h-auto' /> */}
+                            <div className="box">
+                                <Carousel useKeyboardArrows={true}>
+                                    {images.map((URL, index) => (
+                                    <div className="slide">
+                                        <img alt="sample_file" src={URL} key={index} />
+                                    </div>
+                                    ))}
+                                </Carousel>
+                            </div>
                     </div>
 
-                    <div className='md:w-1/2 w-full'>
-                        <h3 className='text-2xl font-semibold mb-4'>{singleProduct?.name}</h3>
+                    <div className='md:w-1/2 w-full mt-6 pt-6'>
+                        <h3 className='text-4xl mb-4 font-custom font-light text-text-light'>{singleProduct?.name}</h3>
                         <p className='text-xl text-primary mb-4'>${singleProduct?.price}{singleProduct?.oldPrice && <s className='ml-1'>${singleProduct?.oldPrice}</s>}</p>
                         <p className='text-gray-400 mb-4'>{singleProduct?.description}</p>
 

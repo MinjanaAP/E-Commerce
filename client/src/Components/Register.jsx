@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from '../redux/features/auth/authApi';
-import signUpImage from "../assets/signup_image.jpg"
+import signUpImage from "../assets/signup_image.jpg";
+import Swal from 'sweetalert2';
+
 
 function Register() {
     const [message, setMessage] = useState('');
