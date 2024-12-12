@@ -25,8 +25,9 @@ const Login = () => {
             const response = await loginUser(data).unwrap();
             const { token, user } = response;
 
-            //* Set user details to local storage.
-            dispatch(setUser({ user }));
+            //* Set user details to session storage.
+            //! console.log("CAtch token in login page "+token );
+            dispatch(setUser({ user,token }));
 
             
             alert("Login Successful");
