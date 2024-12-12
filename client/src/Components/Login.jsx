@@ -14,34 +14,44 @@ const Login = () => {
   const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
 
-  //* Handle login
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const data = {
-      email,
-      password,
+
+    //* Handle login
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const data = {
+            email,
+            password,
+        };
+
+        try {
+            const response = await loginUser(data).unwrap();
+            const { token, user } = response;
+
+            //* Set user details to session storage.
+            //! console.log("CAtch token in login page "+token );
+            dispatch(setUser({ user,token }));
+
+            
+            //alert("Login Successful");
+             Swal.fire({
+                title: "Done!",
+                text: "Successfully Login!",
+                icon: "success"
+              });
+
+            //? change re-direct url based on user role
+            //console.log(user);
+            if(user.role=="admin"){
+                navigate('/dashboard/admin')
+            }else{
+                navigate('/');
+            }
+
+        } catch (error) {
+            setMessage("Please provide a valid email and password");
+        }
+
     };
-
-    try {
-      const response = await loginUser(data).unwrap();
-      const { token, user } = response;
-      dispatch(setUser({ user }));
-      Swal.fire({
-        title: "Done!",
-        text: "Successfully Login!",
-        icon: "success"
-      });
-
-      // Redirect based on role
-      if (user.role === "admin") {
-        navigate("/dashboard/admin");
-      } else {
-        navigate("/");
-      }
-    } catch (error) {
-      setMessage("Invalid email address or password");
-    }
-  };
 
   return (
     <div className="flex h-screen bg-blue-900">
