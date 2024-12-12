@@ -19,7 +19,7 @@ const PrivateRoute = ({ children, role }) => {
         const validateToken = async () => {
             const token = sessionStorage.getItem('token').replace(/^"(.*)"$/, '$1');
             
-            console.log("Token that get from session storage for send to validate" + token);
+            //* console.log("Token that get from session storage for send to validate" + token);
             if (!token) {
                 setIsValid(false); 
                 return;

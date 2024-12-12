@@ -144,7 +144,7 @@ router.patch('/edit-profile', async (req, res)=>{
 
 router.post('/validateToken', (req, res) => {
     const token = req.headers.authorization?.split(' ')[1];
-    console.log('Token received:', token); 
+    //* console.log('Token received:', token); 
     if (!token) {
         return res.status(401).json({ message: 'Token is required' });
     }
