@@ -29,6 +29,7 @@ import AboutUs from "../Components/AboutUs";
 import TermsAndConditions from "../Components/TermsAndConditions";
 import TrackingOrderPage from "../Components/TrackingOrderPage";
 import Messages from "../pages/Dashboard/Admin/messages/Messages";
+import Category from "../pages/Dashboard/Admin/category/ManageCategory"
 
 const router = createBrowserRouter([
   {
@@ -78,7 +79,8 @@ const router = createBrowserRouter([
         { path: "update-product/:id", element:<PrivateRoute role="admin"><div><UpdateProduct/></div></PrivateRoute>},
         { path: "users", element:<PrivateRoute role="admin"><ManageUser/></PrivateRoute> },
         { path: "manage-orders", element:<PrivateRoute role="admin"><ManageOrders/></PrivateRoute>},
-        { path: "messages", element:<Messages/>}
+        { path: "messages", element:<Messages/>},
+        { path: "categories", element:<PrivateRoute role="admin"> <Category/> </PrivateRoute>}
     ]
   }
 

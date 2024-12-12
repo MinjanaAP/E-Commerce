@@ -1,5 +1,5 @@
 import { LineChart, Line, ResponsiveContainer } from 'recharts';
-// import { FaBox } from 'react-icons/fa';
+import { FaBox } from 'react-icons/fa';
 
 const AdminCard = ({ title, value, percentage, chartData, chartColor }) => {
     return (
@@ -7,7 +7,7 @@ const AdminCard = ({ title, value, percentage, chartData, chartColor }) => {
             <div className="flex items-center justify-between mb-4">
                 {/*//? Left Logo */}
                 <div className="bg-green-100 text-green-500 p-3 rounded-full">
-                    {/* <FaBox size={24} /> */}
+                    <FaBox size={24} />
                 </div>
                 {/*//? Right Stats */}
                 <div>
