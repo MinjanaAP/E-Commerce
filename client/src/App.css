@@ -129,8 +129,6 @@ nav {
 .header__container {
   min-height: 650px;
   background-color: var(--primary-color-light);
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
@@ -174,16 +172,79 @@ nav {
 }
 
 .categories__grid {
-  max-width: var(--max-width-900);
-  margin: auto;
-  margin-top: 4rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .categories__card {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px; 
+  background-size: cover; 
+  background-position: center; 
+  text-decoration: none;
+  color: #ffffff;
+  font-size: medium;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categories__card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.categories__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: 0.3s ease;
+  z-index: 1;
+}
+
+.categories__card:hover::before {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.image__container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden; 
+  transition: transform 0.3s ease;
+}
+
+.categories__card:hover .image__container {
+  transform: scale(1.1);
+}
+
+.image__container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.categories__card h4 {
+  display: none;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.categories__card:hover h4 {
+  color:white;
+  display: contents;
 }
 
 .categories__card img {
@@ -191,7 +252,6 @@ nav {
   margin: auto;
   margin-bottom: 1rem;
   border: 5px solid var(--white);
-  border-radius: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -285,12 +345,10 @@ nav {
 }
 
 .deals__container {
+  display: flex;
   background-color: var(--primary-color-light);
-  border-radius: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
   align-items: center;
+  justify-content: space-between;
 }
 
 .deals__image {
@@ -307,15 +365,43 @@ nav {
 }
 
 .deals__content {
-  max-width: 600px;
-  margin-right: auto;
+  flex: 1;
+  padding: 2rem;
 }
 
-.deals__content h5 {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--primary-color);
+
+.deals__logos {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logos__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
+  gap: 40px; /* Add spacing between the logos */
+  width: 100%;
+  max-width: 300px; /* Optional: Control the grid's width */
+}
+
+.logos__grid img {
+  width: 100%; /* Make logos responsive */
+  height: auto;
+  object-fit: contain; /* Ensure logos maintain aspect ratio */
+  border: 2px solid #ccc; /* Optional: Add border around logos */
+  border-radius: 8px; /* Optional: Rounded corners */
+}
+
+@media (max-width: 768px) {
+  .deals__container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logos__grid {
+    grid-template-columns: repeat(2, 1fr); /* Adjust grid for smaller screens */
+  }
 }
 
 .deals__content h4 {
@@ -334,12 +420,12 @@ nav {
 .deals__countdown {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
 }
 
 .deals__countdown__card {
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 200px;
   display: grid;
   place-content: center;
   text-align: center;
