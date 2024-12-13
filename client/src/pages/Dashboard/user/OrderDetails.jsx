@@ -2,16 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useGetOrdersByIdQuery } from '../../../redux/features/orders/ordersApi';
 import { useParams } from 'react-router-dom';
+import { FaClock, FaBoxOpen, FaTruck, FaCheckCircle } from 'react-icons/fa'; // Import appropriate icons
 
 function OrderDetails() {
     const { user } = useSelector((state) => state.auth);
     const { orderId } = useParams();
-    console.log(orderId);
     const { data: order, error, isLoading } = useGetOrdersByIdQuery(orderId);
-    console.log(order);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>No orders!</div>;
+    if (isLoading) return <div className="text-center py-6 text-lg text-gray-700">Loading...</div>;
+    if (error) return <div className="text-center py-6 text-lg text-red-500">No orders found!</div>;
 
     const isCompleted = (status) => {
         const statuses = ["pending", "processing", "shipped", "completed"];
@@ -25,36 +24,42 @@ function OrderDetails() {
             status: 'pending',
             label: 'Pending',
             description: 'Your order has been created and is awaiting processing.',
-            icon: { iconName: 'time-line', bgColor: 'red-500', textColor: 'gray-800' },
+            icon: <FaClock />,
+            bgColor: 'bg-red-500',
         },
         {
             status: 'processing',
             label: 'Processing',
             description: 'Your order is currently being processed.',
-            icon: { iconName: 'loader-line', bgColor: 'yellow-800', textColor: 'yellow-800' },
+            icon: <FaBoxOpen />,
+            bgColor: 'bg-yellow-500',
         },
         {
             status: 'shipped',
             label: 'Shipped',
             description: 'Your order has been shipped.',
-            icon: { iconName: 'truck-line', bgColor: 'blue-800', textColor: 'blue-800' },
+            icon: <FaTruck />,
+            bgColor: 'bg-blue-500',
         },
         {
             status: 'completed',
             label: 'Completed',
             description: 'Your order has been successfully completed.',
-            icon: { iconName: 'check-line', bgColor: 'green-800', textColor: 'green-900' },
+            icon: <FaCheckCircle />,
+            bgColor: 'bg-green-500',
         },
     ];
 
     return (
-        <section className="section__container rounded p-6">
-            <h2 className="text-2xl font-semibold mb-4">
-                Payment Status: {order?.status}
+        <section className="section__container rounded p-8 bg-white shadow-lg">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+                Order Details
             </h2>
-            <p className="mb-4">Order Id: {order?.orderId}</p>
-            <p className="mb-8">Status: {order?.status}</p>
-            <ol className="sm:flex items-center relative">
+            <div className="mb-6 text-lg text-gray-600">
+                <p><strong>Order ID:</strong> {order?.orderId}</p>
+                <p><strong>Payment Status:</strong> {order?.status}</p>
+            </div>
+            <ol className="relative space-y-8 sm:flex sm:items-center sm:space-y-0">
                 {steps.map((step, index) => (
                     <TimelineStep
                         key={index}
@@ -62,8 +67,6 @@ function OrderDetails() {
                         isCompleted={isCompleted(step.status)}
                         isCurrent={isCurrent(step.status)}
                         isLastStep={index === steps.length - 1}
-                        icon={step.icon}
-                        description={step.description}
                     />
                 ))}
             </ol>
@@ -71,25 +74,37 @@ function OrderDetails() {
     );
 }
 
-function TimelineStep({ step, isCompleted, isCurrent, isLastStep, icon, description }) {
+function TimelineStep({ step, isCompleted, isCurrent, isLastStep }) {
     return (
-        <li
-            className={`flex-1 flex items-center ${
-                isCompleted ? 'text-green-600' : isCurrent ? 'text-yellow-500' : 'text-gray-400'
-            }`}
-        >
-            <div
-                className={`rounded-full h-8 w-8 flex items-center justify-center ${
-                    isCompleted ? 'bg-green-600' : isCurrent ? 'bg-yellow-500' : 'bg-gray-400'
-                }`}
-            >
-                <i className={`icon-${icon.iconName}`}></i>
+        <li className="relative flex-1 sm:flex sm:items-center">
+            <div className="flex items-center">
+                <div
+                    className={`rounded-full h-12 w-12 flex items-center justify-center ${
+                        isCompleted ? 'bg-green-500' : isCurrent ? step.bgColor : 'bg-gray-300'
+                    } text-white text-xl transition-all duration-300 transform ${
+                        isCurrent ? 'scale-110' : ''
+                    }`}
+                >
+                    {step.icon}
+                </div>
+                {!isLastStep && (
+                    <span
+                        className={`hidden sm:block flex-1 h-2 ${
+                            isCompleted || isCurrent ? 'bg-green-500' : 'bg-gray-300'
+                        } transition-colors duration-300`}
+                    ></span>
+                )}
             </div>
-            <div className="ml-4">
-                <h4 className="font-bold">{step.label}</h4>
-                <p className="text-sm">{description}</p>
+            <div className="mt-4 sm:mt-0 sm:ml-4 text-center sm:text-left">
+                <h4
+                    className={`text-lg font-semibold ${
+                        isCompleted || isCurrent ? 'text-gray-900' : 'text-gray-500'
+                    } transition-colors duration-300`}
+                >
+                    {step.label}
+                </h4>
+                <p className="text-sm text-gray-500">{step.description}</p>
             </div>
-            {!isLastStep && <span className="flex-1 border-t border-gray-300"></span>}
         </li>
     );
 }

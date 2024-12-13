@@ -94,7 +94,7 @@ const ShopPage = () => {
                                 [...Array(totalPages)].map((_, index) => (
                                     <button key={index}
                                         onClick={() => handlePageChange(index + 1)}
-                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-gray-8 text-white' : 'bg-gray-300 text-gray-700'}
+                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-gray-8 text-black' : 'bg-gray-300 text-gray-600'}
                                     rounded-md mx-1`}
                                     >{index + 1}</button>
                                 ))

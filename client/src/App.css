@@ -587,6 +587,38 @@ nav {
   border-top: 2px solid var(--extra-light);
 }
 
+.timeline-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-step .icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.timeline-step .description {
+  margin-left: 1rem;
+}
+
+.timeline-line {
+  height: 4px;
+  flex: 1;
+  background-color: #e5e7eb;
+  margin: 0 0.5rem;
+}
+
 @media (width < 900px) {
   .nav__links {
     display: none;
