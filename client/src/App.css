@@ -94,6 +94,10 @@ nav {
   display: flex;
   align-items: center;
   gap: 2rem;
+  font-family: "Poiret One", sans-serif !important ;
+  font-weight: 800;
+  letter-spacing: 2px;
+  /* font-family: "Shadows Into Light", cursive !important; */
 }
 
 .link a {
@@ -158,6 +162,7 @@ nav {
 
 .header__content p {
   margin-bottom: 2rem;
+  letter-spacing: 1px;
   /* color:#000000ae;
   font-size: 14px !important;
   text-align: justify;

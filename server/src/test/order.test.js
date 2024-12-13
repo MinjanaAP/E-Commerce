@@ -2,11 +2,17 @@ const request = require("supertest");
 const express = require("express");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const stripe = require("stripe");
+const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const Order = require("../orders/orders.model");
 const User = require("../users/user.model");
 const orderRouter = require("../orders/order.route");
+
+jest.mock("nodemailer", () => ({
+    createTransport: jest.fn().mockReturnValue({
+        sendMail: jest.fn().mockResolvedValue("Mock email sent"),
+    }),
+}));
 
 jest.mock("stripe", () => {
     return jest.fn(() => ({
@@ -35,7 +41,7 @@ jest.mock("stripe", () => {
 
 let app;
 let mongoServer;
-let token;  
+let token;
 
 beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
@@ -45,12 +51,12 @@ beforeAll(async () => {
     //! Create a test user and generate a JWT token
     const user = new User({
         email: "test@example.com",
-        password: "password", 
+        password: "password",
     });
     await user.save();
 
-    token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY || 'default_secret_key', {
-        expiresIn: '1h',
+    token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY || "default_secret_key", {
+        expiresIn: "1h",
     });
 
     app = express();
@@ -99,8 +105,10 @@ describe("Orders API", () => {
     });
 
     it("should fetch orders by email", async () => {
+        const userId = new mongoose.Types.ObjectId();
         const order = await Order.create({
             orderId: "123",
+            userId: userId,
             products: [{ productId: "abc", quantity: 2 }],
             amount: 100,
             email: "test@example.com",
@@ -117,8 +125,10 @@ describe("Orders API", () => {
     });
 
     it("should fetch order by ID", async () => {
+        const userId = new mongoose.Types.ObjectId();
         const order = await Order.create({
             orderId: "123",
+            userId: userId,
             products: [{ productId: "abc", quantity: 2 }],
             amount: 100,
             email: "test@example.com",
@@ -134,8 +144,11 @@ describe("Orders API", () => {
     });
 
     it("should fetch all orders", async () => {
+        const userId = new mongoose.Types.ObjectId();
+
         await Order.create({
             orderId: "123",
+            userId: userId,
             products: [{ productId: "abc", quantity: 2 }],
             amount: 100,
             email: "test@example.com",
@@ -151,8 +164,10 @@ describe("Orders API", () => {
     });
 
     it("should update an order status", async () => {
+        const userId = new mongoose.Types.ObjectId();
         const order = await Order.create({
             orderId: "123",
+            userId: userId,
             products: [{ productId: "abc", quantity: 2 }],
             amount: 100,
             email: "test@example.com",
@@ -169,8 +184,11 @@ describe("Orders API", () => {
     });
 
     it("should delete an order", async () => {
+        const userId = new mongoose.Types.ObjectId();
+
         const order = await Order.create({
             orderId: "123",
+            userId: userId,
             products: [{ productId: "abc", quantity: 2 }],
             amount: 100,
             email: "test@example.com",
