@@ -1,11 +1,27 @@
-/* Professional Contact Page Styles */
+/* General Contact Page Styles */
 .contact-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
     padding: 20px;
-    background: linear-gradient(135deg, #f3f4f6, #e3e4e8); /* Subtle gradient for a polished look */
+    background: url('../assets/back.jpg') no-repeat center center; /* Add your background image */
+    background-size: cover;
+    background-position: center;
+    padding-left: 200px; /* Add left padding to move container slightly to the right */
+}
+
+/* Overlay to control background opacity */
+.contact-container::before {
+    content: ""; /* Empty content */
+    position: absolute; /* Position the overlay */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Black overlay with opacity */
+    z-index: -1; /* Make sure the overlay is behind the content */
 }
 
 /* Form Wrapper */
@@ -13,23 +29,23 @@
     max-width: 480px; /* Limit form width */
     width: 100%;
     padding: 30px;
-    background-color: #fff; /* Clean white background */
-    border-radius: 12px; /* Softer corners */
+    background-color: rgba(255, 255, 255, 0.85); /* Slight transparency for readability */
+    border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Elevate the form */
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-family: 'Roboto', sans-serif; /* Professional font */
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Title Styling */
 .contact-title {
     font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 10px;
-    color: #2c3e50; /* Muted dark color for text */
+    margin-bottom: 20px;
+    color: #2c3e50;
     font-weight: bold;
-    text-transform: uppercase; /* Add emphasis with uppercase */
+    text-transform: uppercase;
     letter-spacing: 1.2px;
 }
 
@@ -38,26 +54,38 @@
 .contact-textarea {
     padding: 15px;
     font-size: 1rem;
-    border: 1px solid #dfe6e9; /* Light border for elegance */
-    border-radius: 8px; /* Softer corners */
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
     width: 100%;
     font-family: 'Roboto', sans-serif;
     transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f7f9fc;
+    margin-bottom: 15px;
 }
 
+/* Focus State for Input and Textarea */
 .contact-input:focus,
 .contact-textarea:focus {
-    border-color: #3498db; /* Focus color */
+    border-color: #3498db;
     outline: none;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2); /* Focus glow effect */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+    background-color: #fff;
+}
+
+/* Textarea Specific Styling */
+.contact-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
 }
 
 /* Submit Button */
 .contact-submit-button {
+    width: 100%;
     padding: 15px;
     font-size: 1.1rem;
     color: #fff;
-    background-color: #3498db; /* Professional blue */
+    background-color: #3498db;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -68,12 +96,12 @@
 }
 
 .contact-submit-button:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-    transform: translateY(-2px); /* Subtle hover lift */
+    background-color: #2980b9;
+    transform: translateY(-2px);
 }
 
 .contact-submit-button:active {
-    background-color: #1c5980; /* Pressed state */
+    background-color: #1c5980;
     transform: translateY(0);
 }
 
@@ -82,16 +110,16 @@
 .error-message {
     font-size: 1rem;
     text-align: center;
-    margin-top: -10px; /* Align closer to the form */
+    margin-top: -10px;
     font-weight: bold;
 }
 
 .success-message {
-    color: #27ae60; /* Success green */
+    color: #27ae60;
 }
 
 .error-message {
-    color: #e74c3c; /* Error red */
+    color: #e74c3c;
 }
 
 /* Responsive Design */
