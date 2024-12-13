@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
 @import 'remixicon/fonts/remixicon.css';
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Shadows+Into+Light&display=swap');
 
 :root {
   --primary-color: #ed3849;
@@ -111,9 +112,6 @@ nav {
   color: var(--text-dark);
 }
 
-.nav__logo a span {
-  color: var(--primary-color);
-}
 
 .nav__icons {
   flex: 1;
@@ -155,13 +153,20 @@ nav {
 .header__content h1 {
   font-size: 5rem;
   font-weight: 800;
-  font-family: var(--header-font);
-  color: var(--text-dark);
+  
 }
 
 .header__content p {
   margin-bottom: 2rem;
-  color: var(--text-light);
+  /* color:#000000ae;
+  font-size: 14px !important;
+  text-align: justify;
+  letter-spacing: 2px;
+  font-weight: 800 !important;
+  line-height: 20px; */
+  /* font-family: "Poiret One", sans-serif !important ; */
+  /* font-family: "Shadows Into Light", cursive !important; */
+ 
 }
 
 .header__image {
@@ -193,15 +198,33 @@ nav {
   background-position: center; 
   text-decoration: none;
   color: #ffffff;
-  font-size: medium;
+  font-size: large;
   font-weight: bold;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categories__name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  position: relative;
+  bottom: 10%;
+  transition: transform 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+
+.categories__card:hover .categories__name {
+  transform: scale(1.2);
+  bottom: 5%;
 }
 
 .categories__card:hover {
   transform: scale(1.05);
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
   background-color: rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  font-size: large;
+  font-weight: bold;
 }
 
 .categories__card::before {

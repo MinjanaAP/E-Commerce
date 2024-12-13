@@ -1,26 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import homeImage from '../../assets/home-image.jpg';
+import homeImage from '../../assets/home-image.png';
 
 const Banner = () => {
     return (
         <div
-            className="flex items-center justify-between h-screen text-white bg-center bg-no-repeat bg-cover header__container"
+            className="flex items-center justify-between h-screen bg-right bg-no-repeat bg-cover text-whit header__container"
             style={{
                 backgroundImage: `url(${homeImage})`,
+                height: "100%",
+                width: "auto",
+                backgroundSize: "auto 100%",
             }}
         >
             <div className="z-30 max-w-2xl p-8 header__content">
-                <h4 className="mb-4 text-lg uppercase">UP TO 20% Discount on</h4>
-                <h1 className="mb-6 text-5xl font-bold">Girl's Fashion</h1>
-                <p className="mb-6 leading-relaxed">
-                    Welcome to Fashion House, your ultimate destination for the latest in girls' fashion trends. 
-                    Discover a wide range of luxurious accessories and stylish products that redefine elegance and style. 
-                    From chic clothing to premium fashion essentials, Fashion House is dedicated to bringing you 
-                    the best in modern and trending fashion. Elevate your wardrobe and embrace luxury with us!
+                <h1 className="mb-6 text-5xl font-custom">Women<span className='text-red-600'>'</span>s Latest Fashion</h1>
+                <p className="mb-6 leading-relaxed font-secondary">
+                    Step into elegance with our curated collection of women's apparel and accessories. 
+                    From timeless classics to contemporary trends, discover outfits that celebrate femininity and individuality. 
+                    Upgrade your wardrobe with exclusive designs crafted to complement every occasion, only at DressMore.
                 </p>
-                <button className="px-6 py-3 text-white bg-red-500 rounded btn hover:bg-red-600">
-                    <Link to="/shop">EXPLORE NOW</Link>
+                <button className="px-16 py-4 text-black border border-black bg-none hover:bg-gray-800 hover:text-white">
+                    <Link to="/shop"><h6 className='font-custom'>SHOP NOW</h6></Link>
                 </button>
             </div>
         </div>

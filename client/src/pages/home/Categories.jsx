@@ -8,16 +8,16 @@ import category4 from '../../assets/category-4.jpg';
 
 const Categories = () => {
   const categories = [
-    { name: 'Accessories', path: 'accessories', image: category1 },
-    { name: 'Dress Collection', path: 'dress', image: category2 },
-    { name: 'Jewellery', path: 'jewellery', image: category3 },
-    { name: 'Cosmetics', path: 'cosmetics', image: category4 },
+    { name: 'Tops', path: 'tops', image: category1 },
+    { name: 'Pants', path: 'pants', image: category2 },
+    { name: 'Dress Collection', path: 'fress', image: category3 },
+    { name: 'Office Ware', path: 'office', image: category4 },
   ];
 
   return (
-    <div>
-      <div className='flex items-center justify-center p-6'>
-        <h2>Shop By Category</h2>
+    <div className='my-12'>
+      <div className="p-10 text-3xl font-semibold text-center text-gray-800">
+        <h2 className='font-custom'>Shop By Category</h2>
       </div>
       <div className="categories__grid section__container">
         {categories.map((category) => (
@@ -29,7 +29,7 @@ const Categories = () => {
               backgroundImage: `url(${category.image})`,
             }}
           >
-            <h4>{category.name}</h4>
+            <h4 className="categories__name">{category.name}</h4>
           </Link>
         ))}
       </div>
