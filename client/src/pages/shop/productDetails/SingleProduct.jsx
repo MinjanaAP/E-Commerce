@@ -42,12 +42,12 @@ const SingleProduct = () => {
 
       // Placeholder Component
     const ProductPlaceholder = () => (
-        <section className="section__container mt-8">
-        <div className="flex flex-col items-start md:flex-row gap-8 justify-center">
-            <div className="md:w-1/3 w-full">
+        <section className="mt-8 section__container">
+        <div className="flex flex-col items-start justify-center gap-8 md:flex-row">
+            <div className="w-full md:w-1/3">
             <Skeleton height={300} />
             </div>
-            <div className="md:w-1/2 w-full mt-6 pt-6">
+            <div className="w-full pt-6 mt-6 md:w-1/2">
             <Skeleton width="70%" height={30} className="mb-4" />
             <Skeleton width="40%" height={25} className="mb-4" />
             <Skeleton count={4} height={20} className="mb-2" />
@@ -74,8 +74,8 @@ const SingleProduct = () => {
             (
                 <div>
                      <section className='section__container bg-primary-light'>
-                <h2 className='section__header capitalize'>Shop Page</h2>
-                <div className='section__subheader space-x-2'>
+                <h2 className='capitalize section__header'>Shop Page</h2>
+                <div className='space-x-2 section__subheader'>
                     <span className='hover:text-primary'>
                         <Link to="/">home</Link>
                     </span>
@@ -88,13 +88,13 @@ const SingleProduct = () => {
                 </div>
             </section>
 
-            <section className='section__container mt-8'>
-                <div className='flex flex-col items-start md:flex-row gap-8 justify-center'>
+            <section className='mt-8 section__container'>
+                <div className='flex flex-col items-start justify-center gap-8 md:flex-row'>
                     {/* product image */}
-                    <div className='md:w-1/3 w-full'>
+                    <div className='w-full md:w-1/3'>
                         {/* <img src={singleProduct?.image}
                             alt=""
-                            className='rounded-md w-full h-auto' /> */}
+                            className='w-full h-auto rounded-md' /> */}
                             <div className="box">
                                 <Carousel useKeyboardArrows={true}>
                                     {images.map((URL, index) => (
@@ -106,10 +106,10 @@ const SingleProduct = () => {
                             </div>
                     </div>
 
-                    <div className='md:w-1/2 w-full mt-6 pt-6'>
-                        <h3 className='text-4xl mb-4 font-custom font-light text-text-light'>{singleProduct?.name}</h3>
-                        <p className='text-xl text-primary mb-4'>${singleProduct?.price}{singleProduct?.oldPrice && <s className='ml-1'>${singleProduct?.oldPrice}</s>}</p>
-                        <p className='text-gray-400 mb-4'>{singleProduct?.description}</p>
+                    <div className='w-full pt-6 mt-6 md:w-1/2'>
+                        <h3 className='mb-4 text-4xl font-light font-custom text-text-light'>{singleProduct?.name}</h3>
+                        <p className='mb-4 text-xl text-primary'>${singleProduct?.price}{singleProduct?.oldPrice && <s className='ml-1'>${singleProduct?.oldPrice}</s>}</p>
+                        <p className='mb-4 text-gray-400'>{singleProduct?.description}</p>
 
                         {/*additional product info*/}
                         <div className='flex flex-col space-y-2'>
@@ -124,7 +124,7 @@ const SingleProduct = () => {
                                 e.stopPropagation();
                                 handleAddToCart(singleProduct)
                             }}
-                            className='mt-6 px-6 py-3 bg-primary text-white rounded-md'>
+                            className='px-6 py-3 mt-6 text-white rounded-md bg-primary'>
                                 Add to Cart
                             </button>
                         </div>
@@ -133,12 +133,12 @@ const SingleProduct = () => {
             </section>
 
             {/* display reviews */}
-            <section className='section__container__review mt-8 '>
+            <section className='mt-8 section__container__review '>
                 <ReviewsCard productReviews={productReviews}/>
             </section>
             {/* <RelatedProducts/> */}
-            <div className='section__container__review mt-8 '>
-                <h2 className="text-4xl font-custom tracking-tight text-gray-900 mb-8">Related Products</h2>
+            <div className='mt-8 section__container__review '>
+                <h2 className="mb-8 text-4xl tracking-tight text-gray-900 font-custom">Related Products</h2>
                 <ProductCards products={products.slice(0, visibleProducts)} />
             </div>
                 </div>
