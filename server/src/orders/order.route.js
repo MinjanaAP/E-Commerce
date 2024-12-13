@@ -125,7 +125,35 @@ router.get('/:email', async(req,res)=>{
 });
 
 //! get order of logged user
-router.get('/my-orders', async(req,res)=>{
+router.post('/my-orders', async(req,res)=>{
+    const token = req.headers.authorization?.split(' ')[1];
+    if(!token){
+        return res.status(401).json({ message:'Token is required.'});
+    }
+
+    try{
+        const user = jwt.verify(token, JWT_SECRET);
+        try {
+            const orders = await Order.find({userId : user._id});
+            
+            
+            if(!user){
+                return res.status(401).json({ message:'User not found.'});
+            }
+
+            if(orders.length === 0 || !orders){
+                return res.status(400).send({orders:0, message: "no orders found for this user"});
+            }
+            res.status(200).send({orders});
+
+        } catch (error) {
+            res.status(500).send({message:"failed to fetch orders of logged user."})
+        }
+
+    }catch(e){
+        res.status(401).json({message: 'Invalid token.'})
+    }
+
 
 })
 
