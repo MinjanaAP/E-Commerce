@@ -1,9 +1,9 @@
 const request = require("supertest");
 const express = require("express");
 const mongoose = require("mongoose");
-const Reviews = require("./reviews.model");
+const Reviews = require("../reviews/reviews.model");
 const Products = require("../products/products.model");
-const reviewRouter = require("./reviews.router");
+const reviewRouter = require("../reviews/reviews.router");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 
 let app;
