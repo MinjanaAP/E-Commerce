@@ -17,7 +17,7 @@ const Categories = () => {
   return (
     <div className='my-12'>
       <div className="p-10 text-3xl font-semibold text-center text-gray-800">
-        <h2>Shop By Category</h2>
+        <h2 className='font-custom'>Shop By Category</h2>
       </div>
       <div className="categories__grid section__container">
         {categories.map((category) => (
