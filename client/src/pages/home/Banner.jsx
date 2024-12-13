@@ -20,9 +20,11 @@ const Banner = () => {
                     From timeless classics to contemporary trends, discover outfits that celebrate femininity and individuality. 
                     Upgrade your wardrobe with exclusive designs crafted to complement every occasion, only at Fashion House.
                 </p>
+                <Link to="/shop">
                 <button className="px-16 py-4 text-black border border-black bg-none hover:bg-gray-800 hover:text-white">
-                    <Link to="/shop">SHOP NOW</Link>
+                    SHOP NOW
                 </button>
+                </Link>
             </div>
         </div>
     );

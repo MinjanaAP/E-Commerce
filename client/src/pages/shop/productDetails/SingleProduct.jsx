@@ -72,10 +72,8 @@ const SingleProduct = () => {
         <>
            {products &&
             (
-                <div>
-                     <section className='section__container bg-primary-light'>
-                <h2 className='section__header capitalize'>Product Page</h2>
-                <div className='section__subheader space-x-2'>
+            <div>
+                    <div className='section__subheader space-x-2 pl-8'>
                     <span className='hover:text-primary'>
                         <Link to="/">home</Link>
                     </span>
@@ -85,8 +83,7 @@ const SingleProduct = () => {
                     </span>
                     <i className="ri-arrow-right-s-line"></i>
                     <span className='hover:text-primary'>{singleProduct.name}</span>
-                </div>
-            </section>
+                    </div>
 
             <section className='section__container mt-8'>
                 <div className='flex flex-col items-start md:flex-row gap-8 justify-center'>
@@ -124,7 +121,7 @@ const SingleProduct = () => {
                                 e.stopPropagation();
                                 handleAddToCart(singleProduct)
                             }}
-                            className='mt-6 px-6 py-3 text-white rounded-md bg-gray-800 hover:bg-gray-950'>
+                            className='mt-6 px-6 py-3 text-white rounded-md bg-red-800 hover:bg-gray-950'>
                                 Add to Cart
                             </button>
                         </div>

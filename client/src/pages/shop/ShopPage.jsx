@@ -11,6 +11,11 @@ const ShopPage = () => {
         priceRange: ''
     });
 
+        //? Scroll to the top
+        useEffect(() => {
+            window.scrollTo(0, 0);
+          })
+
     //! get all categories
     const { data: categories, error: categoryError, isLoading: categoriesIsLoading } = useGetAllCategoriesQuery();
 
@@ -62,10 +67,6 @@ const ShopPage = () => {
 
     return (
         <>
-            <section className='section__container p-2'>
-                <h2 className='section__header capitalize'>Product Page</h2>
-                {/* <p className='section__subheader' style={{ textAlign: 'center',display: 'inline-block' }}>Unveiling Style: Timeless Elegance Meets Modern Trends in Women's Fashion.</p> */}
-            </section>
 
             <section className='section__container'>
                 <div className='flex flex-col md:flex-row md:gap-12 gap-8'>
