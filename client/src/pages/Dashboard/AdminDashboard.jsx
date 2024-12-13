@@ -56,7 +56,7 @@ function AdminDashboard() {
             <div>
                 <div className="nav__logo">
                     <Link to="/">
-                        Fashion House<span>.</span>
+                        Dress<span>More.</span>
                     </Link>
                     <p className="text-xs italic">Admin Dashboard</p>
                 </div>

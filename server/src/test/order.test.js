@@ -3,8 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const stripe = require("stripe");
-const Order = require("./orders.model");
-const orderRouter = require("./order.route");
+const jwt = require("jsonwebtoken");
+const Order = require("../orders/orders.model");
+const User = require("../users/user.model");
+const orderRouter = require("../orders/order.route");
 
 jest.mock("stripe", () => {
     return jest.fn(() => ({
@@ -33,11 +35,23 @@ jest.mock("stripe", () => {
 
 let app;
 let mongoServer;
+let token;  
 
 beforeAll(async () => {
     mongoServer = await MongoMemoryServer.create();
     const uri = mongoServer.getUri();
     await mongoose.connect(uri);
+
+    //! Create a test user and generate a JWT token
+    const user = new User({
+        email: "test@example.com",
+        password: "password", 
+    });
+    await user.save();
+
+    token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY || 'default_secret_key', {
+        expiresIn: '1h',
+    });
 
     app = express();
     app.use(express.json());
@@ -72,9 +86,12 @@ describe("Orders API", () => {
     });
 
     it("should confirm payment and save an order", async () => {
-        const response = await request(app).post("/orders/confirm-payment").send({
-            session_id: "mock_session_id",
-        });
+        const response = await request(app)
+            .post("/orders/confirm-payment")
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                session_id: "mock_session_id",
+            });
 
         expect(response.status).toBe(200);
         expect(response.body.message).toBe("Payment confirmed and order updated");
@@ -90,7 +107,10 @@ describe("Orders API", () => {
             status: "pending",
         });
 
-        const response = await request(app).get(`/orders/${order.email}`);
+        const response = await request(app)
+            .get(`/orders/${order.email}`)
+            .set("Authorization", `Bearer ${token}`);
+
         expect(response.status).toBe(200);
         expect(response.body.orders.length).toBe(1);
         expect(response.body.orders[0].email).toBe("test@example.com");
@@ -105,7 +125,10 @@ describe("Orders API", () => {
             status: "pending",
         });
 
-        const response = await request(app).get(`/orders/order/${order._id}`);
+        const response = await request(app)
+            .get(`/orders/order/${order._id}`)
+            .set("Authorization", `Bearer ${token}`);
+
         expect(response.status).toBe(200);
         expect(response.body.email).toBe("test@example.com");
     });
@@ -119,7 +142,10 @@ describe("Orders API", () => {
             status: "pending",
         });
 
-        const response = await request(app).get("/orders");
+        const response = await request(app)
+            .get("/orders")
+            .set("Authorization", `Bearer ${token}`);
+
         expect(response.status).toBe(200);
         expect(response.body.length).toBe(1);
     });
@@ -135,6 +161,7 @@ describe("Orders API", () => {
 
         const response = await request(app)
             .patch(`/orders/update-order-status/${order._id}`)
+            .set("Authorization", `Bearer ${token}`)
             .send({ status: "shipped" });
 
         expect(response.status).toBe(200);
@@ -150,7 +177,10 @@ describe("Orders API", () => {
             status: "pending",
         });
 
-        const response = await request(app).delete(`/orders/delete-order/${order._id}`);
+        const response = await request(app)
+            .delete(`/orders/delete-order/${order._id}`)
+            .set("Authorization", `Bearer ${token}`);
+
         expect(response.status).toBe(200);
         expect(response.body.order).toHaveProperty("orderId", "123");
     });
