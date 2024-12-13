@@ -33,8 +33,8 @@ const SingleProduct = () => {
     if(error) return <p>Errorloading product details.</p>
     return (
         <>
-            <section className='section__container bg-primary-light'>
-                <h2 className='section__header capitalize'>Shop Page</h2>
+            <section className='section__container bg-white'>
+                <h2 className='section__header capitalize'>Product Page</h2>
                 <div className='section__subheader space-x-2'>
                     <span className='hover:text-primary'>
                         <Link to="/">home</Link>
@@ -84,7 +84,7 @@ const SingleProduct = () => {
                                 e.stopPropagation();
                                 handleAddToCart(singleProduct)
                             }}
-                            className='mt-6 px-6 py-3 bg-primary text-white rounded-md'>
+                            className='mt-6 px-6 py-3 text-white rounded-md bg-gray-800 hover:bg-gray-950'>
                                 Add to Cart
                             </button>
                         </div>

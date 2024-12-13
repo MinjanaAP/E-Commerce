@@ -10,7 +10,7 @@ const AboutUs = () => {
     return (
         <section className="about-us">
             <div className="about-us-container">
-                {/* Description on the left */}
+                {/* Description */}
                 <div className="about-description">
                     <h2>About Us</h2>
                     <p>
@@ -20,7 +20,7 @@ const AboutUs = () => {
                     </p>
                 </div>
 
-                {/* Image on the right */}
+                {/* Image */}
                 <div className="about-image">
                     <img src={aboutImage} alt="About Us" />
                 </div>

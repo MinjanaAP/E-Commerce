@@ -62,9 +62,9 @@ const ShopPage = () => {
 
     return (
         <>
-            <section className='section__container bg-primary-light'>
-                <h2 className='section__header capitalize'>Shop Page</h2>
-                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Womens Fashion Products.</p>
+            <section className='section__container p-2'>
+                <h2 className='section__header capitalize'>Product Page</h2>
+                {/* <p className='section__subheader' style={{ textAlign: 'center',display: 'inline-block' }}>Unveiling Style: Timeless Elegance Meets Modern Trends in Women's Fashion.</p> */}
             </section>
 
             <section className='section__container'>
@@ -93,7 +93,7 @@ const ShopPage = () => {
                                 [...Array(totalPages)].map((_, index) => (
                                     <button key={index}
                                         onClick={() => handlePageChange(index + 1)}
-                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}
+                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-gray-8 text-white' : 'bg-gray-300 text-gray-700'}
                                     rounded-md mx-1`}
                                     >{index + 1}</button>
                                 ))

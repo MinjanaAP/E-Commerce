@@ -24,7 +24,7 @@
 .section__container {
   max-width: var(--max-width-1400);
   margin: auto;
-  padding: 5rem 1rem;
+  padding: 3rem 0.5rem;
 }
 
 .section__header {
@@ -36,27 +36,20 @@
   text-align: center;
 }
 
-.section__subheader {
-  max-width: 500px;
-  margin: auto;
-  color: var(--text-light);
-  text-align: center;
-}
-
 .btn {
   padding: 0.75rem 1.5rem;
   outline: none;
   border: none;
   font-size: 1rem;
   color: var(--white);
-  background-color: var(--primary-color);
+  background-color: #2d2d2d; /* gray-800 */
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s; /* Smooth color transition */
 }
 
 .btn:hover {
-  background-color: var(--primary-color-dark);
+  background-color: #1a1a1a; /* gray-950 */
 }
 
 img {

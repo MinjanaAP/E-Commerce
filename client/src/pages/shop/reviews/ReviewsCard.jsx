@@ -48,7 +48,7 @@ const ReviewsCard = ({productReviews}) => {
         <div className='mt-12'>
             <button 
             onClick={handleOpenReviewModal}
-            className='px-6 py-3 bg-primary text-white rounded-md'>Add A Review</button>
+            className='px-6 py-3 text-white rounded-md bg-gray-800 hover:bg-gray-950'>Add A Review</button>
         </div>
         {/* review modal */}
         <PostAReview isModalOpen={isModalOpen} handleClose={handleCloseReviewModal}/>
