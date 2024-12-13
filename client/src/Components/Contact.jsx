@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { getBaseUrl } from '../utils/baseURL';
 import './Contact.css';
-import contactImage from '../assets/contact.jpg'; // Make sure the image path is correct
 
 const Contact = () => {
     const [name, setName] = useState('');
@@ -45,9 +44,6 @@ const Contact = () => {
 
     return (
         <section className="contact-container">
-            <div className="contact-image-wrapper">
-                <img src={contactImage} alt="Contact Us" className="contact-image" />
-            </div>
             <div className="contact-form-wrapper">
                 <h2 className="contact-title">Contact Us</h2>
                 <form onSubmit={handleSubmit} className="contact-form">

@@ -1,110 +1,112 @@
-/* General Contact Page Styles */
+/* Professional Contact Page Styles */
 .contact-container {
     display: flex;
-    align-items: stretch; /* Stretch items to fill the available height */
-    justify-content: space-between;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    gap: 0; /* Remove any gap */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 20px;
+    background: linear-gradient(135deg, #f3f4f6, #e3e4e8); /* Subtle gradient for a polished look */
 }
 
-/* Contact Form Section */
+/* Form Wrapper */
 .contact-form-wrapper {
-    flex: 1;
+    max-width: 480px; /* Limit form width */
+    width: 100%;
+    padding: 30px;
+    background-color: #fff; /* Clean white background */
+    border-radius: 12px; /* Softer corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Elevate the form */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically align the form */
-    padding: 0 20px; /* Remove any extra padding */
+    gap: 20px;
+    font-family: 'Roboto', sans-serif; /* Professional font */
 }
 
+/* Title Styling */
 .contact-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    font-family: 'Georgia', serif;
-    color: #333;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #2c3e50; /* Muted dark color for text */
+    font-weight: bold;
+    text-transform: uppercase; /* Add emphasis with uppercase */
+    letter-spacing: 1.2px;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* Input and Textarea Styling */
 .contact-input,
 .contact-textarea {
     padding: 15px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #dfe6e9; /* Light border for elegance */
+    border-radius: 8px; /* Softer corners */
     width: 100%;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .contact-input:focus,
 .contact-textarea:focus {
-    border-color: #007bff;
+    border-color: #3498db; /* Focus color */
     outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2); /* Focus glow effect */
 }
 
+/* Submit Button */
 .contact-submit-button {
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 15px;
+    font-size: 1.1rem;
     color: #fff;
-    background-color: #007bff;
+    background-color: #3498db; /* Professional blue */
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .contact-submit-button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: translateY(-2px); /* Subtle hover lift */
+}
+
+.contact-submit-button:active {
+    background-color: #1c5980; /* Pressed state */
+    transform: translateY(0);
+}
+
+/* Success and Error Messages */
+.success-message,
+.error-message {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: -10px; /* Align closer to the form */
+    font-weight: bold;
 }
 
 .success-message {
-    color: green;
-    font-size: 1rem;
+    color: #27ae60; /* Success green */
 }
 
 .error-message {
-    color: red;
-    font-size: 1rem;
-}
-
-/* Image Section */
-.contact-image-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 100%; /* Ensures image fills the container */
-}
-
-.contact-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Image will cover the container */
-    border-radius: 10px;
+    color: #e74c3c; /* Error red */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
+    .contact-form-wrapper {
         padding: 20px;
+        gap: 15px;
     }
 
-    .contact-form-wrapper,
-    .contact-image-wrapper {
-        max-width: 100%;
+    .contact-title {
+        font-size: 1.5rem;
     }
 
-    .contact-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .contact-submit-button {
+        font-size: 1rem;
+        padding: 12px;
     }
 }
