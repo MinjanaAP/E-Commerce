@@ -59,9 +59,15 @@ const authApi = createApi({
                 method: 'PATCH',
                 body: profileData
             }),
+        }),
+        verifyToken:builder.mutation({
+            query: () => ({
+                url: '/verifyToken',
+                method: 'POST',
+            }),
         })
     })
 })
 
-export const {useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation,useGetUserQuery,useDeleteUserMutation,useUpdateUserRoleMutation,useEditProfileMutation} = authApi;
+export const {useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation,useGetUserQuery,useDeleteUserMutation,useUpdateUserRoleMutation,useEditProfileMutation,useVerifyTokenMutation} = authApi;
 export default authApi;

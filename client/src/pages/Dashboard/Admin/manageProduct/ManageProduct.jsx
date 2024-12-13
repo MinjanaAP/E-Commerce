@@ -52,13 +52,13 @@ const ManageProduct = () => {
                         <div className="rounded-t mb-0 px-4 py-3 border-0">
                             <div className="flex flex-wrap items-center">
                                 <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                                    <h3 className="font-semibold text-base text-blueGray-700">All Products</h3>
+                                    <h3 className="text-2xl font-semibold text-blueGray-700">All Products</h3>
                                 </div>
                                 <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                                     <button className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">See all</button>
                                 </div>
                             </div>
-                            <h3 className='my-4  text-sm'>Showing {startProduct} to {endProduct} of {totalProducts} products</h3>
+                            <h3 className='my-4  text-sm ps-3'><span className='text-xl pe-2'>{totalProducts}</span> products are available on site.</h3>
                         </div>
 
                         <div className="block w-full overflow-x-auto">

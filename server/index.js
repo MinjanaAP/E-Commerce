@@ -17,6 +17,7 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
+    allowedHeaders: ['Authorization', 'Content-Type'],
   })
 );
 
@@ -29,7 +30,8 @@ const productRoutes = require('./src/products/products.route');
 const reviewRoutes = require('./src/reviews/reviews.router');
 const orderRoutes = require('./src/orders/order.route');
 const statsRouts = require('./src/stats/stats.route');
-const contactRoutes = require('./src/Contact/contact.router'); 
+const contactRoutes = require('./src/Contact/contact.router');
+const category = require('./src/categories/category.route'); 
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
@@ -37,6 +39,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/stats', statsRouts);
 app.use('/api/contact', contactRoutes);
+app.use('/api/category', category);
 
 
 main()
@@ -58,5 +61,5 @@ app.post("/uploadImage", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Backend Server running on prot : ${port}`);
 });

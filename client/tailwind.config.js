@@ -16,8 +16,12 @@ export default {
         'primary-light': '#f4e5ec',
         'text-dark': '#0f172a',
         'text-light': '#64748b',
-        'extra-light': '#f8fafc'
-      }
+        'extra-light': '#f8fafc',
+        'adminBackground': '#f2f7fb',
+      },
+      fontFamily: {
+        custom: ['Playfair Display', 'serif'], 
+      },
     },
   },
   plugins: [],

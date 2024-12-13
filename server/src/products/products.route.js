@@ -3,30 +3,47 @@ const Products = require("./products.model");
 const Reviews = require("../reviews/reviews.model");
 const verifyToken = require("../middleware/verifyToken");
 const verifyAdmin = require("../middleware/verifyAdmin");
+const uploadImage = require('../utils/uploadImage'); 
 const router = express.Router();
 
 //post a product
 router.post("/create-product", async (req, res) => {
   try {
+    const { image, image1,image2,image3, ...productData } = req.body;
+
+    // Upload images to Cloudinary
+    const uploadedImage = await uploadImage(image);
+    const uploadedImage1 = await uploadImage(image1);
+    const uploadedImage2 = await uploadImage(image2);
+    const uploadedImage3 = await uploadImage(image3);
+
+    // Create new product with uploaded image URLs
     const newProduct = new Products({
-      ...req.body,
+      ...productData,
+      image: uploadedImage,
+      image1: uploadedImage1,
+      image2: uploadedImage2,
+      image3: uploadedImage3
     });
+
     const savedProduct = await newProduct.save();
-    // calculate review
+
+    // Calculate reviews (if any logic remains unchanged)
     const reviews = await Reviews.find({ productId: savedProduct._id });
     if (reviews.length > 0) {
       const totalRating = reviews.reduce(
-        (acc, reviews) => acc + reviews.rating,
+        (acc, review) => acc + review.rating,
         0
       );
       const averageRating = totalRating / reviews.length;
       savedProduct.rating = averageRating;
       await savedProduct.save();
     }
+
     res.status(201).json(savedProduct);
   } catch (error) {
-     console.error("Error creating new product", error);
-     res.status(500).send({message: "Failed to create new product"})
+    console.error("Error creating new product", error);
+    res.status(500).send({ message: "Failed to create new product" });
   }
 });
 
