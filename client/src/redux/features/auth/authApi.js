@@ -61,9 +61,10 @@ const authApi = createApi({
             }),
         }),
         verifyToken:builder.mutation({
-            query: () => ({
-                url: '/verifyToken',
+            query: (payload) => ({
+                url: '/validateToken',
                 method: 'POST',
+                body: payload,
             }),
         })
     })

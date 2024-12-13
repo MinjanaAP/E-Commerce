@@ -2,17 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductCards from './productDetails/ProductCards';
 import ShopFiltering from './ShopFiltering';
 import { useFetchAllProductsQuery } from '../../redux/features/products/productsApi';
-
-const filters = {
-    categories: ['all', 'accessories', 'dress', 'jewellery', 'cosmetics'],
-    colors: ['all', 'black', 'red', 'gold', 'blue', 'silver', 'beige', 'green'],
-    priceRanges: [
-        { label: 'Under $50', min: 0, max: 50 },
-        { label: '$50 - $100', min: 50, max: 100 },
-        { label: '$100 - $200', min: 100, max: 200 },
-        { label: '$200 and above', min: 200, max: Infinity }
-    ]
-};
+import { useGetAllCategoriesQuery } from '../../redux/features/category/categoryApi';
 
 const ShopPage = () => {
     const [filtersState, setFiltersState] = useState({
@@ -21,23 +11,35 @@ const ShopPage = () => {
         priceRange: ''
     });
 
+    //! get all categories
+    const { data: categories, error: categoryError, isLoading: categoriesIsLoading } = useGetAllCategoriesQuery();
+
+    const filters = {
+        categories: ['all', ...categories?.map(category => category.name) || []],
+        colors: ['all', 'black', 'red', 'gold', 'blue', 'silver', 'beige', 'green'],
+        priceRanges: [
+            { label: 'Under $50', min: 0, max: 50 },
+            { label: '$50 - $100', min: 50, max: 100 },
+            { label: '$100 - $200', min: 100, max: 200 },
+            { label: '$200 and above', min: 200, max: Infinity }
+        ]
+    };
+
     const [currentPage, setCurrentPage] = useState(1);
     const [ProductsPerPage] = useState(8);
 
     const { category, color, priceRange } = filtersState;
-    const [minPrice, maxPrice] = priceRange.split("-").map(Number)
+    const [minPrice, maxPrice] = priceRange.split("-").map(Number);
 
     const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({
-        category: category !== 'all' ? category : '', // Send empty string when all is selected
-        color: color !== 'all' ? color : '',         // Send empty string when all is selected
+        category: category !== 'all' ? category : '',
+        color: color !== 'all' ? color : '',
         minPrice: isNaN(minPrice) ? '' : minPrice,
         maxPrice: isNaN(maxPrice) ? '' : maxPrice,
         page: currentPage,
         limit: ProductsPerPage,
     });
-    console.log(products);
 
-    // clear the filters
     const clearFilters = () => {
         setFiltersState({
             category: 'all',
@@ -45,19 +47,18 @@ const ShopPage = () => {
             priceRange: ''
         });
     };
-    // handle page change
+
     const handlePageChange = (pageNumber) => {
         if (pageNumber > 0 && pageNumber <= totalPages) {
             setCurrentPage(pageNumber);
         }
-    }
+    };
 
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>Error loading products...</div>
+    if (categoriesIsLoading || isLoading) return <div>Loading...</div>;
+    if (categoryError || error) return <div>Error loading data...</div>;
 
     const startProduct = (currentPage - 1) * ProductsPerPage + 1;
     const endProduct = startProduct + products.length - 1;
-
 
     return (
         <>
@@ -82,7 +83,7 @@ const ShopPage = () => {
                     <div className='w-full md:w-3/4'>
                         <h3 className='text-xl font-medium mb-4'>Showing {startProduct} to {endProduct} of {totalProducts} products</h3>
                         <ProductCards products={products} />
-                        {/*pagination control*/}
+                        {/* Pagination Control */}
                         <div className='mt-6 flex justify-center'>
                             <button
                                 disabled={currentPage === 1}
@@ -100,7 +101,7 @@ const ShopPage = () => {
                             <button
                                 disabled={currentPage === totalPages}
                                 onClick={() => handlePageChange(currentPage + 1)}
-                                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-mdml-2'>Next</button>
+                                className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md ml-2'>Next</button>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const UploadImage = ({ name, setImage }) => {
                 const imageUrl = res.data;
                 setUrl(imageUrl);
                 // console.log(imageUrl);
-                alert("Image uploaded successfully");
+                //alert("Image uploaded successfully");
                 setImage(imageUrl); 
             })
             .then(() => setLoading(false))
@@ -75,7 +75,7 @@ const UploadImage = ({ name, setImage }) => {
                 url && (
                     <div className='mt-2 text-sm text-green-600'>
                         <p>Image uploaded successfully!</p>
-                        <img src={url} alt="uploaded-image" />
+                        <img src={url} alt="uploaded-image" className="size-48"/>
                     </div>
                 )
             }

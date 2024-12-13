@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
+import Swal from 'sweetalert2'
 import { useAddProductMutation } from '../../../../redux/features/products/productsApi';
 import { useNavigate } from 'react-router-dom';
 import UploadImage from './UploadImage';
-
-const categories = [
-    { label: 'Select Category', value: '' },
-    { label: 'Accessories', value: 'accessories' },
-    { label: 'Dress', value: 'dress' },
-    { label: 'Jewellery', value: 'jewellery' },
-    { label: 'Cosmetics', value: 'cosmetics' },
-    { label: 'Skin Care', value: 'skin-care' },
-];
+import { useGetAllCategoriesQuery } from '../../../../redux/features/category/categoryApi';
 
 const colors = [
     { label: 'Select Color', value: '' },
@@ -28,6 +21,7 @@ const colors = [
 
 const AddProduct = () => {
     const { user } = useSelector((state) => state.auth);
+    const { data: categories, error: categoryError, isLoading: categoriesIsLoading } = useGetAllCategoriesQuery();
     const [product, setProduct] = useState({
         name: '',
         category: '',
@@ -36,10 +30,12 @@ const AddProduct = () => {
         description: ''
     });
     const [image, setImage] = useState('');
-    const [image1,setImage1] = useState('');
-    const [image2,setImage2] = useState('');
-    const [image3,setImage3] = useState('');
-    const [AddProduct, {isLoading, error}] = useAddProductMutation()
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [AddProduct, { isLoading, error }] = useAddProductMutation();
+    
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,40 +45,52 @@ const AddProduct = () => {
         });
     };
 
-    const navigate = useNavigate()
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!product.name || !product.category || !product.price || !product.description || !product.color || !image || !image1 || !image2 || !image3 ) {
-          alert('Please fill all the required fields and upload both images');
-          return;
+        if (!product.name || !product.category || !product.price || !product.description || !product.color || !image || !image1 || !image2 || !image3) {
+            alert('Please fill all the required fields and upload both images');
+            return;
         }
         try {
-          await AddProduct({ ...product, image, image1,image2,image3, author: user?._id }).unwrap();
-          alert('Product added successfully');
-          setProduct({
-            name: '',
-            category: '',
-            color: '',
-            price: '',
-            description: '',
-          });
-          setImage('');
-          setImage1('');
-          setImage2('');
-          setImage3('');
-          navigate("/shop");
+            await AddProduct({ ...product, image, image1, image2, image3, author: user?._id }).unwrap();
+            //alert('Product added successfully');
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Product added successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            setProduct({
+                name: '',
+                category: '',
+                color: '',
+                price: '',
+                description: '',
+            });
+            setImage('');
+            setImage1('');
+            setImage2('');
+            setImage3('');
+            navigate("/shop");
         } catch (error) {
-          console.error("Failed to submit product", error);
+            console.error("Failed to submit product", error);
         }
-      };
-      
+    };
 
-  return (
-    <div className="container mx-auto mt-8 p-6">
-        <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-        <TextInput
+    if (categoriesIsLoading) {
+        return <div>Loading categories...</div>;
+    }
+
+    if (categoryError) {
+        return <div>Error loading categories: {categoryError.message}</div>;
+    }
+
+    return (
+        <div className="container mx-auto mt-8 p-6">
+            <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <TextInput
                     label="Product Name"
                     name="name"
                     placeholder="Ex: Diamond Earrings"
@@ -92,9 +100,12 @@ const AddProduct = () => {
                 <SelectInput
                     label="Category"
                     name="category"
-                    value={product.category}
-                    onChange={handleChange}
-                    options={categories}
+                    value={product.category} 
+                    onChange={handleChange} 
+                    options={[{ label: 'Select Category', value: '' }, ...(categories || []).map(cat => ({
+                        label: cat.name, 
+                        value: cat.name,   
+                    }))]} 
                 />
                 <SelectInput
                     label="Color"
@@ -112,52 +123,51 @@ const AddProduct = () => {
                     onChange={handleChange}
                 />
                 <UploadImage
-                name="image"
-                id="image"
-                value={e => setImage(e.target.value)}
-                placeholder='Image'
-                setImage={setImage}
+                    name="image"
+                    id="image"
+                    value={e => setImage(e.target.value)}
+                    placeholder='Image'
+                    setImage={setImage}
                 />
                 <UploadImage
-                name="image"
-                id="image"
-                value={e => setImage1(e.target.value)}
-                placeholder='Image'
-                setImage={setImage1}
+                    name="image"
+                    id="image"
+                    value={e => setImage1(e.target.value)}
+                    placeholder='Image'
+                    setImage={setImage1}
                 />
                 <UploadImage
-                name="image"
-                id="image"
-                value={e => setImage2(e.target.value)}
-                placeholder='Image'
-                setImage={setImage2}
+                    name="image"
+                    id="image"
+                    value={e => setImage2(e.target.value)}
+                    placeholder='Image'
+                    setImage={setImage2}
                 />
                 <UploadImage
-                name="image"
-                id="image"
-                value={e => setImage3(e.target.value)}
-                placeholder='Image'
-                setImage={setImage3}
+                    name="image"
+                    id="image"
+                    value={e => setImage3(e.target.value)}
+                    placeholder='Image'
+                    setImage={setImage3}
                 />
                 <div>
-                <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
-                <textarea name="description" id="description"
-                className='add-product-InputCSS'
-                value={product.description}
-                placeholder='Write a product description'
-                onChange={handleChange}
-                ></textarea>
+                    <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
+                    <textarea name="description" id="description"
+                        className='add-product-InputCSS'
+                        value={product.description}
+                        placeholder='Write a product description'
+                        onChange={handleChange}
+                    ></textarea>
                 </div>
 
                 <div>
                     <button type='submit'
-                    className='add-product-btn'
+                        className='add-product-btn'
                     >Add Product</button>
                 </div>
-
-        </form>
-    </div>
-  )
+            </form>
+        </div>
+    );
 }
 
-export default AddProduct
+export default AddProduct;

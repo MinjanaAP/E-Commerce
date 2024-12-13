@@ -25,6 +25,7 @@ const navItems = [
     },
     { path: '/dashboard/users', label: 'Users', icon: 'fa-solid fa-users' },
     { path: '/dashboard/manage-orders', label: 'Manage Orders', icon: 'fa-solid fa-file-invoice' },
+    { path: '/dashboard/categories', label: 'Categories', icon: 'fa-solid fa-layer-group' },
     { path: '/dashboard/messages', label: 'Messages', icon: 'fa-solid fa-envelope' },
 ];
 
@@ -55,7 +56,7 @@ function AdminDashboard() {
             <div>
                 <div className="nav__logo">
                     <Link to="/">
-                        Fashion House<span>.</span>
+                        Dress<span>More.</span>
                     </Link>
                     <p className="text-xs italic">Admin Dashboard</p>
                 </div>

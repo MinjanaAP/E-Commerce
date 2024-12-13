@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const PrivateRoute = ({ children, role }) => {
     const { user } = useSelector((state) => state.auth);
@@ -46,12 +47,22 @@ const PrivateRoute = ({ children, role }) => {
     }
 
     if (!isValid) {
-        alert('You must be logged in!');
+        // alert('You must be logged in!');
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You must be logged in!'"
+          });
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     if (role && user?.role !== role) {
-        alert('You are not authorized to access this page!');
+        // alert('You are not authorized to access this page!');
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You are not authorized to access this page!'"
+          });
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 

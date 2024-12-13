@@ -10,9 +10,9 @@ const JWT_SECRET = process.env.JWT_SECRET_KEY || 'default_secret_key';
 
 //! Create checkout session
 router.post('/create-checkout-session', async (req, res) => {
-    const { products} = req.body; // Extract `products` and `userId` from the request body
+    const { products} = req.body; 
     try {
-        // Map products to Stripe line items
+        //? Map product for stripe line type
         const lineItems = products.map((product) => ({
             price_data: {
                 currency: 'usd',
@@ -24,7 +24,7 @@ router.post('/create-checkout-session', async (req, res) => {
             },
             quantity: product.quantity,
         }));
-        // Create Stripe session
+        //? Create Stripe session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
@@ -123,6 +123,11 @@ router.get('/:email', async(req,res)=>{
         res.status(500).send({message:"failed to fetch orders by email"})
     }
 });
+
+//! get order of logged user
+router.get('/my-orders', async(req,res)=>{
+
+})
 
 //!get order by id
 router.get('/order/:id', async(req,res)=>{
