@@ -61,7 +61,7 @@ const Navbar = () => {
 
         {/* Desktop Logo */}
         <div className="hidden md:block nav__logo">
-          <Link to="/">Fashion House<span>.</span></Link>
+          <Link to="/">DressMore</Link>
         </div>
 
         {/* Desktop Navigation Links */}

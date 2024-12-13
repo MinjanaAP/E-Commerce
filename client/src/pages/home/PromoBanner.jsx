@@ -1,26 +1,54 @@
-import React from 'react'
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTruck, faDollarSign, faHeadset } from "@fortawesome/free-solid-svg-icons";
 
-const PromoBanner = () => {
+const FeaturesSection = () => {
+  const features = [
+    {
+      id: 1,
+      icon: faTruck,
+      title: "Free Delivery",
+      description:
+        "Enjoy free and fast delivery on all orders, making it easier to shop the latest trends in women’s fashion from the comfort of your home.",
+    },
+    {
+      id: 2,
+      icon: faDollarSign,
+      title: "100% Money Back Guarantee",
+      description:
+        "Shop confidently with our money-back guarantee. If you're not satisfied with your purchase, we'll ensure a hassle-free refund.",
+    },
+    {
+      id: 3,
+      icon: faHeadset,
+      title: "Dedicated Customer Support",
+      description:
+        "Our support team is here to assist you with size guides, styling advice, or any questions to make your shopping experience seamless.",
+    },
+  ];
+
   return (
-    <section className='section__container banner__container'>
-        <div className='banner__card'>
-            <span><i className="ri-truck-line"></i></span>
-            <h4>Free Delivery</h4>
-            <p>Offers convenience and the ability to shop from anywhere, anytime</p>
+    <div className="py-12 my-12 bg-white">
+      <div className="max-w-6xl px-4 mx-auto">
+        <div className="grid gap-6 md:grid-cols-3">
+          {features.map((feature) => (
+            <div
+              key={feature.id}
+              className="flex flex-col items-center gap-2 p-6 text-center transition duration-300 border border-gray-200 shadow-md hover:shadow-lg"
+            >
+              <div className="mb-4 text-5xl text-gray-600">
+                <FontAwesomeIcon icon={feature.icon} />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-gray-800">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-gray-600">{feature.description}</p>
+            </div>
+          ))}
         </div>
-        <div className='banner__card'>
-            <span><i className="ri-money-dollar-circle-line"></i></span>
-            <h4>100% Money Back Guaranty</h4>
-            <p>E-commerce have a review s ystem where customers can share feedback.</p>
-        </div>
-        <div className='banner__card'>
-            <span><i className="ri-user-voice-fill"></i></span>
-            <h4>Strong Support</h4>
-            <p>Offer customer support services to assist customers with queries and issues</p>
-        </div>
-        
-    </section>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default PromoBanner
+export default FeaturesSection;
