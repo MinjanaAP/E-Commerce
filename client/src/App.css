@@ -27,6 +27,12 @@
   padding: 3rem 0.5rem;
 }
 
+.section__container__review {
+  max-width: var(--max-width-1400);
+  margin: auto;
+  padding: 1rem 1rem;
+}
+
 .section__header {
   margin-bottom: 1rem;
   font-size: 2rem;

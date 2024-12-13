@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 import { useDispatch } from 'react-redux';
 import { useFetchProductByIdQuery } from '../../../redux/features/products/productsApi';
 import RatingStars from '../../../Components/RatingStars';
@@ -7,13 +8,18 @@ import { addToCart } from '../../../redux/features/cart/cartSlice';
 import ReviewsCard  from '../reviews/ReviewsCard';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ProductCards from '../ProductCards';
+import { useFetchRelatedProductsQuery } from '../../../redux/features/products/productsApi';
 
 
 const SingleProduct = () => {
     const { id } = useParams();
+    const [visibleProducts, setVisibleProducts] = useState(8);
    
     const dispatch = useDispatch();
     const {data, error, isLoading} = useFetchProductByIdQuery(id);
+    const {data:products,relatedProductError,relatedProductIsLoading} = useFetchRelatedProductsQuery(id);
+    console.log("products"+products)
     
     const singleProduct = data?.product || {};
     const productReviews = data?.reviews || [];
@@ -29,11 +35,45 @@ const SingleProduct = () => {
         dispatch(addToCart(product))
     }
 
-    if(isLoading) return <p>Loading...</p>
+    //? Scroll to the top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [id]);
+
+      // Placeholder Component
+    const ProductPlaceholder = () => (
+        <section className="section__container mt-8">
+        <div className="flex flex-col items-start md:flex-row gap-8 justify-center">
+            <div className="md:w-1/3 w-full">
+            <Skeleton height={300} />
+            </div>
+            <div className="md:w-1/2 w-full mt-6 pt-6">
+            <Skeleton width="70%" height={30} className="mb-4" />
+            <Skeleton width="40%" height={25} className="mb-4" />
+            <Skeleton count={4} height={20} className="mb-2" />
+            <Skeleton width="30%" height={40} className="mt-6" />
+            </div>
+        </div>
+        </section>
+    );
+
+    if (isLoading) {
+        return (
+        <div>
+            <section className="section__container bg-primary-light">
+            <Skeleton height={40} width="50%" />
+            </section>
+            <ProductPlaceholder />
+        </div>
+        );
+    }
     if(error) return <p>Errorloading product details.</p>
     return (
         <>
-            <section className='section__container bg-white'>
+           {products &&
+            (
+                <div>
+                     <section className='section__container bg-primary-light'>
                 <h2 className='section__header capitalize'>Product Page</h2>
                 <div className='section__subheader space-x-2'>
                     <span className='hover:text-primary'>
@@ -93,9 +133,17 @@ const SingleProduct = () => {
             </section>
 
             {/* display reviews */}
-            <section className='section__container mt-8'>
+            <section className='section__container__review mt-8 '>
                 <ReviewsCard productReviews={productReviews}/>
             </section>
+            {/* <RelatedProducts/> */}
+            <div className='section__container__review mt-8 '>
+                <h2 className="text-4xl font-custom tracking-tight text-gray-900 mb-8">Related Products</h2>
+                <ProductCards products={products.slice(0, visibleProducts)} />
+            </div>
+                </div>
+            )
+           }
         </>
     )
 }

@@ -12,6 +12,11 @@ const JWT_SECRET = process.env.JWT_SECRET_KEY || 'default_secret_key';
 router.post('/register', async(req,res)=>{
     try{
         const {username, email, password} = req.body;
+        
+        if (!username || !email || !password || email.trim() === '') {
+            return res.status(400).send({ message: 'All fields are required' });
+        }
+
         const user = new User({username, email, password});
         const emailToken = crypto.randomBytes(32).toString("hex");
         try {
