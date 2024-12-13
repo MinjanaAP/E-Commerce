@@ -66,11 +66,11 @@ const router = createBrowserRouter([
     element: <PrivateRoute><DashboardLayout/></PrivateRoute>, 
     children: [
       //? User routes here
-      { path: '', element: <UserDMain /> },
-      { path: "orders", element: <UserOrders /> },
-      { path: "payments", element: <UserPayments /> },
-      { path: "profile", element: <UserProfile /> },
-      { path: "reviews", element: <UserReviews /> },
+      { path: '', element: <PrivateRoute><UserDMain /></PrivateRoute>},
+      { path: "orders", element: <PrivateRoute><UserOrders /></PrivateRoute> },
+      { path: "payments", element: <PrivateRoute><UserPayments /></PrivateRoute> },
+      { path: "profile", element:  <PrivateRoute><UserProfile /></PrivateRoute> },
+      { path: "reviews", element: <PrivateRoute><UserReviews /></PrivateRoute> },
 
         //? Admin routes here
         { path: "admin", element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute> },
