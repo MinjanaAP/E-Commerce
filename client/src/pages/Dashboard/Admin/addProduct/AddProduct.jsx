@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
+import Swal from 'sweetalert2'
 import { useAddProductMutation } from '../../../../redux/features/products/productsApi';
 import { useNavigate } from 'react-router-dom';
 import UploadImage from './UploadImage';
@@ -52,7 +53,14 @@ const AddProduct = () => {
         }
         try {
             await AddProduct({ ...product, image, image1, image2, image3, author: user?._id }).unwrap();
-            alert('Product added successfully');
+            //alert('Product added successfully');
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Product added successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
             setProduct({
                 name: '',
                 category: '',

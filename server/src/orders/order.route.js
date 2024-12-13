@@ -124,6 +124,11 @@ router.get('/:email', async(req,res)=>{
     }
 });
 
+//! get order of logged user
+router.get('/my-orders', async(req,res)=>{
+
+})
+
 //!get order by id
 router.get('/order/:id', async(req,res)=>{
     try {

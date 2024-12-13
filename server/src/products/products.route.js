@@ -167,6 +167,7 @@ router.get("/related/:id", async(req,res)=>{
       $or: [
         {name:{$regex: titleRegex}},
         {category: product.category},
+        {color:product.color}
       ]
     });
     res.status(200).send(relatedProducts);
