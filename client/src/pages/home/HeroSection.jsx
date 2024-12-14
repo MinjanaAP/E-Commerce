@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 export default function HeroSection() {
   return (
     <div className="relative my-12 overflow-hidden bg-primary-light section__container">
@@ -78,12 +79,12 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              <a
+              <Link to="/shop"><a
                 href="#"
                 className="px-16 py-4 text-black border border-black bg-none hover:bg-gray-800 hover:text-white font-custom"
               >
-                Explore Trends
-              </a>
+              Explore Trends
+              </a></Link>
             </div>
           </div>
         </div>
