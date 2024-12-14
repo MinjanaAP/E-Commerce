@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import commenterIcon from '../../../assets/avatar.png';
 import { formatDate } from '../../../utils/formatDate';
 import RatingStars from '../../../Components/RatingStars';
-import PostAReview from './postAReview';
+import PostAReview from './PostAReview';
 import {useVerifyTokenMutation} from '../../../redux/features/auth/authApi';
 import axios from 'axios';
 
@@ -51,7 +51,7 @@ const ReviewsCard = ({ productReviews }) => {
     };
 
     return (
-        <div className="my-6 bg-white px-8 mx-10">
+        <div className="px-8 mx-10 my-6 bg-white">
             <div>
                 {reviews.length > 0 ? (
                     <div>
@@ -59,17 +59,17 @@ const ReviewsCard = ({ productReviews }) => {
                         <div>
                             {reviews.map((review, index) => (
                                 <div key={index} className="mt-4">
-                                    <div className="flex gap-4 items-center">
+                                    <div className="flex items-center gap-4">
                                         <img src={commenterIcon} alt="" className="size-14" />
                                         <div className="space-y-1">
-                                            <p className="text-lg font-medium underline capitalize underline-offset-4 text-blue-400">
+                                            <p className="text-lg font-medium text-blue-400 underline capitalize underline-offset-4">
                                                 {review?.userId.username}
                                             </p>
                                             <p className="text-[12px] italic">{formatDate(review?.updatedAt)}</p>
                                             <RatingStars rating={review?.rating} />
                                         </div>
                                     </div>
-                                    <div className="text-gray-600 mt-5 border p-8">
+                                    <div className="p-8 mt-5 text-gray-600 border">
                                         <p className="md:w-4/5">{review?.comment}</p>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@ const ReviewsCard = ({ productReviews }) => {
                 </div>
             )}
             {!isAuthenticated && (
-                <p className="text-red-500 mt-4">You must be logged in to add a review.</p>
+                <p className="mt-4 text-red-500">You must be logged in to add a review.</p>
             )}
             {/* Review modal */}
             <PostAReview isModalOpen={isModalOpen} handleClose={handleCloseReviewModal} />

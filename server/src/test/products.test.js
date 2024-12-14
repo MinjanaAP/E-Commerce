@@ -1,9 +1,9 @@
 const request = require("supertest");
 const express = require("express");
 const mongoose = require("mongoose");
-const Products = require("./products.model");
+const Products = require("../products/products.model");
 const Reviews = require("../reviews/reviews.model");
-const productRouter = require("./products.route");
+const productRouter = require("../products/products.route");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 
 jest.mock("../middleware/verifyToken", () => {

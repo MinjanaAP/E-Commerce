@@ -31,8 +31,8 @@ const Blogs = () => {
   return (
     <section className="py-12 bg-gray-50">
       <div className="container px-4 mx-auto">
-        <h2 className="text-3xl font-semibold text-center text-gray-800">From the blog</h2>
-        <p className="mt-2 text-center text-gray-600">
+        <h2 className="text-3xl text-center text-gray-800 font-custom">From the blog</h2>
+        <p className="mt-2 text-center text-gray-600 font-secondary">
           Learn how to grow your business with our expert advice.
         </p>
 
@@ -56,7 +56,7 @@ const Blogs = () => {
                 <p className="mb-1 text-sm text-gray-500">
                   {blog.date} <span className="inline-block px-2 py-1 text-xs bg-gray-200 rounded">{blog.category}</span>
                 </p>
-                <h3 className="text-lg font-semibold text-gray-800 transition-colors duration-300 group-hover:text-blue-600">
+                <h3 className="text-lg text-gray-800 transition-colors duration-300 group-hover:text-blue-600 font-custom">
                   {blog.title}
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">{blog.description}</p>

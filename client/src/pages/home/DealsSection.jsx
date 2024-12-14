@@ -10,10 +10,10 @@ export default function DealsSection() {
     <div className="py-24 bg-primary-light sm:py-32 section__container">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         <div className="flex flex-col gap-4 px-10 mb-10">
-          <h2 className="text-3xl font-semibold text-center text-gray-800">
+          <h2 className="text-3xl text-center text-gray-800 font-custom">
             Our Brands
           </h2>
-          <p className="text-center text-gray-600 ">
+          <p className="text-center text-gray-600 font-secondary ">
           Our trusted brands bring you the finest in women’s fashion, blending quality, style, and affordability. From chic everyday wear to statement pieces, our partners deliver timeless designs crafted to suit your unique style. Discover the perfect addition to your wardrobe today.
           </p>
         </div>

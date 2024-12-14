@@ -7,7 +7,7 @@ const User = require("../users/user.model");
 const Order = require("../orders/orders.model");
 const Products = require("../products/products.model");
 const Reviews = require("../reviews/reviews.model");
-const statsRouter = require("./stats.route");
+const statsRouter = require("../stats/stats.route");
 
 let app;
 let mongoServer;
@@ -36,20 +36,24 @@ beforeEach(async () => {
 
 describe("Stats API", () => {
   it("should fetch user stats by email", async () => {
+    
     const user = await User.create({
       email: "test@example.com",
       password: "password123",
     });
+
+
 
     const product = await Products.create({
         name: "Test Product",
         price: 200,
         author: new mongoose.Types.ObjectId(),
     })
-
+    const userId = new mongoose.Types.ObjectId();
     await Order.create([
       {
         email: user.email,
+        userId: userId,
         products: [
           { productId: "prod1", quantity: 2 },
           { productId: "prod2", quantity: 1 },
@@ -58,6 +62,7 @@ describe("Stats API", () => {
       },
       {
         email: user.email,
+        userId: userId,
         products: [{ productId: "prod3", quantity: 3 }],
         amount: 30,
       },
@@ -88,9 +93,11 @@ describe("Stats API", () => {
       { name: "Product 2", price: 30, author: user[1]._id},
     ]);
 
+    const userId = new mongoose.Types.ObjectId();
+
     await Order.create([
-      { email: "user1@example.com", products: [{ productId: product[0]._id, quantity: 2 }], amount: 40 },
-      { email: "user2@example.com", products: [{ productId: product[1]._id, quantity: 1 }], amount: 30 },
+      { email: "user1@example.com", products: [{ productId: product[0]._id, quantity: 2 }], amount: 40,userId: userId, },
+      { email: "user2@example.com", products: [{ productId: product[1]._id, quantity: 1 }], amount: 30 ,userId: userId,},
     ]);
 
     await Reviews.create([

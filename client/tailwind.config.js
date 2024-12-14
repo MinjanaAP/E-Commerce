@@ -21,6 +21,7 @@ export default {
       },
       fontFamily: {
         custom: ['Playfair Display', 'serif'], 
+        secondary : ['Shadows Into Light', 'cursive']
       },
     },
   },

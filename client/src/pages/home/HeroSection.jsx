@@ -5,10 +5,10 @@ export default function HeroSection() {
       <div className="pt-12 pb-64 sm:pb-32 sm:pt-20 lg:pb-40 lg:pt-32">
         <div className="relative px-4 mx-auto max-w-7xl sm:static sm:px-6 lg:px-8">
           <div className="sm:max-w-lg">
-            <h1 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-2xl tracking-tight text-gray-900 font-custom sm:text-6xl">
               Discover the Latest Trends
             </h1>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 font-secondary">
               Step into the season with our curated collection of must-have styles. From cutting-edge designs to timeless classics, explore fashion that defines you and sets you apart.
             </p>
           </div>
@@ -81,7 +81,7 @@ export default function HeroSection() {
 
               <Link to="/shop"><a
                 href="#"
-                className="px-16 py-4 text-black border border-black bg-none hover:bg-gray-800 hover:text-white"
+                className="px-16 py-4 text-black border border-black bg-none hover:bg-gray-800 hover:text-white font-custom"
               >
               Explore Trends
               </a></Link>

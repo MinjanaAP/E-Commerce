@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../users/user.model');
-const generateToken = require('./generateToken');
+const generateToken = require('../middleware/generateToken');
 
 jest.mock('jsonwebtoken');
 jest.mock('../users/user.model');

@@ -23,7 +23,7 @@ import AddProduct from "../pages/Dashboard/Admin/addProduct/AddProduct";
 import ManageProduct from "../pages/Dashboard/Admin/manageProduct/ManageProduct";
 import UpdateProduct from "../pages/Dashboard/Admin/manageProduct/UpdateProduct";
 import ManageUser from "../pages/Dashboard/Admin/users/ManageUser";
-import ManageOrders from "../pages/Dashboard/Admin/manageOrders/ManageOrder";
+import ManageOrders from "../pages/Dashboard/Admin/ManageOrders/ManageOrder";
 import Contact from "../Components/Contact";
 import AboutUs from "../Components/AboutUs";
 import TermsAndConditions from "../Components/TermsAndConditions";
