@@ -58,7 +58,7 @@ const ShopFiltering = ({filters, filtersState, setFiltersState, clearFilters}) =
         </div>
         
         {/* clear filters */}
-        <button onClick={clearFilters} className='bg-primary py-1 px-4 text-white rounded'>Clear All Filters</button>
+        <button onClick={clearFilters} className='py-1 px-4 text-white rounded bg-gray-800 hover:bg-gray-950'>Clear All Filters</button>
     </div>
   )
 }

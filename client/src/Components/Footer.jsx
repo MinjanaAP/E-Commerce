@@ -85,7 +85,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="flex flex-col items-center justify-between pt-6 mt-12 border-t md:flex-row">
-          <p className="text-sm">Copyrights © 2025 by Fashion House.All rights Reserved.</p>
+          <p className="text-sm">Copyrights © 2025 by Dress More.All rights Reserved.</p>
           <div className="flex mt-4 space-x-4 md:mt-0">
             <img src={amex} alt="Amex" className="h-6" />
             <img src={visa} alt="Visa" className="h-6" />

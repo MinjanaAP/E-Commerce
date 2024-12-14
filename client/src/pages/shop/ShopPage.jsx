@@ -11,6 +11,11 @@ const ShopPage = () => {
         priceRange: ''
     });
 
+        //? Scroll to the top
+        useEffect(() => {
+            window.scrollTo(0, 0);
+          })
+
     //! get all categories
     const { data: categories, error: categoryError, isLoading: categoriesIsLoading } = useGetAllCategoriesQuery();
 
@@ -62,10 +67,6 @@ const ShopPage = () => {
 
     return (
         <>
-            <section className='section__container bg-primary-light'>
-                <h2 className='section__header capitalize'>Shop Page</h2>
-                <p className='section__subheader'>Discover the Hottest Picks: Elevate Your Style with Our Curated Collection of Trending Womens Fashion Products.</p>
-            </section>
 
             <section className='section__container'>
                 <div className='flex flex-col md:flex-row md:gap-12 gap-8'>
@@ -93,7 +94,7 @@ const ShopPage = () => {
                                 [...Array(totalPages)].map((_, index) => (
                                     <button key={index}
                                         onClick={() => handlePageChange(index + 1)}
-                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}
+                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-gray-8 text-black' : 'bg-gray-300 text-gray-600'}
                                     rounded-md mx-1`}
                                     >{index + 1}</button>
                                 ))

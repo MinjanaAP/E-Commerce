@@ -20,9 +20,11 @@ const Banner = () => {
                     From timeless classics to contemporary trends, discover outfits that celebrate femininity and individuality. 
                     Upgrade your wardrobe with exclusive designs crafted to complement every occasion, only at DressMore.
                 </p>
+                <Link to="/shop">
                 <button className="px-16 py-4 text-black border border-black bg-none hover:bg-gray-800 hover:text-white">
                     <Link to="/shop"><h6 className='font-custom'>SHOP NOW</h6></Link>
                 </button>
+                </Link>
             </div>
         </div>
     );

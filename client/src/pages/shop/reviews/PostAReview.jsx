@@ -70,7 +70,7 @@ const PostAReview = ({ isModalOpen, handleClose }) => {
             className="px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
             <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-primary text-white rounded-md">Submit</button>
+            className="px-4 py-2 text-white rounded-md bg-gray-800 hover:bg-gray-950">Submit</button>
         </div>
       </div>
     </div>

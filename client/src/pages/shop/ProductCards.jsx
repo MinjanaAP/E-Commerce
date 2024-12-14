@@ -10,6 +10,8 @@ const ProductCards = ({ products }) => {
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));
+
+        
     };
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
@@ -26,7 +28,7 @@ const ProductCards = ({ products }) => {
                                     e.stopPropagation();
                                     handleAddToCart(product)
                                 }}>
-                                    <i className='ri-shopping-cart-2-line bg-primary p-1.5 text-white hover:bg-primary-dark'></i>
+                                    <i className='ri-shopping-cart-2-line p-2 bg-red-600 text-white hover:bg-gray-950'></i>
                                 </button>
                             </div>
                         </div>

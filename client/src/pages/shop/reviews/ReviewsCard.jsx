@@ -85,7 +85,7 @@ const ReviewsCard = ({ productReviews }) => {
                 <div className="mt-12">
                     <button
                         onClick={handleOpenReviewModal}
-                        className="px-6 py-3 text-white rounded-md bg-primary"
+                        className="px-6 py-3 bg-primary text-white rounded-md hover:bg-gray-950"
                     >
                         Add A Review
                     </button>

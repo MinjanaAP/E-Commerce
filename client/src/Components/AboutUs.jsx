@@ -1,64 +1,53 @@
 import React from 'react';
-import './AboutUs.css'; // Import the external CSS file
+import './AboutUs.css';
+import aboutImage from '../assets/aboutus.jpg';
+import missionImage from '../assets/mission.jpg';
+import valuesImage from '../assets/value.jpg';
+import journeyImage from '../assets/journey.jpg';
+import whyChooseUsImage from '../assets/chooseus.jpg';
 
 const AboutUs = () => {
     return (
         <section className="about-us">
-            <h2>About Us</h2>
-            <p>
-                Learn more about our journey, values, and commitment to delivering the best in women’s fashion.
-            </p>
-
-            <div>
-                <h3 className="our-story-title">Our Story</h3>
-                <p className="our-story">
-                    Our journey began with a dream: to redefine women’s fashion by blending timeless elegance with modern trends. We're passionate about offering our customers the highest-quality apparel while staying true to our commitment to sustainability and ethical sourcing.
-                </p>
-            </div>
-
-            {/* Featured Collections */}
-            <div className="featured-collections">
-                <div className="collection-card card-dresses">
-                    <h4>Dresses</h4>
+            <div className="about-us-container">
+                {/* Description */}
+                <div className="about-description">
+                    <h2>About Us</h2>
                     <p>
-                        Explore our elegant collection of dresses for all occasions. Whether you're looking for casual, formal, or evening wear, we have something for every style.
+                        Welcome to our world of fashion! We specialize in providing high-quality, timeless, and stylish apparel 
+                        that blends elegance with modern trends. With a commitment to sustainability and ethical practices, 
+                        we aim to make every customer feel confident and chic.
                     </p>
                 </div>
 
-                <div className="collection-card card-accessories">
-                    <h4>Accessories</h4>
-                    <p>
-                        Discover the perfect accessories to complement your outfit. From stylish handbags to sparkling jewelry, we have everything to complete your look.
-                    </p>
-                </div>
-
-                <div className="collection-card card-shoes">
-                    <h4>Shoes</h4>
-                    <p>
-                        Step into style with our wide selection of fashionable shoes. Whether you're looking for sneakers, heels, or boots, we have the perfect pair for you.
-                    </p>
-                </div>
-
-                <div className="collection-card card-sale">
-                    <h4>Sale</h4>
-                    <p>
-                        Don’t miss out on amazing deals in our ongoing sale section. Get the best discounts on your favorite items before they're gone!
-                    </p>
+                {/* Image */}
+                <div className="about-image">
+                    <img src={aboutImage} alt="About Us" />
                 </div>
             </div>
 
-            {/* Testimonials Section */}
-            <div className="testimonials">
-                <h3>Customer Testimonials</h3>
-                <p>
-                    "I absolutely love the dresses from this store! The quality is exceptional, and the styles are on-trend. I feel confident every time I wear one of their pieces." – Emily R.
-                </p>
-                <p>
-                    "The customer service is top-notch! I received my order quickly and in perfect condition. I will definitely be shopping here again." – Sarah W.
-                </p>
-                <p>
-                    "Amazing selection and prices! The sale section is always full of great deals. Highly recommend this store!" – Olivia P.
-                </p>
+            {/* Cards Section */}
+            <div className="card-container">
+                <div className="card">
+                    <img src={missionImage} alt="Our Mission" />
+                    <h3>Our Mission</h3>
+                    <p>To inspire confidence and elegance by delivering exceptional fashion rooted in quality and sustainability.</p>
+                </div>
+                <div className="card">
+                    <img src={valuesImage} alt="Our Values" />
+                    <h3>Our Values</h3>
+                    <p>We are committed to sustainability, inclusivity, and ethical practices in everything we do.</p>
+                </div>
+                <div className="card">
+                    <img src={journeyImage} alt="Our Journey" />
+                    <h3>Our Journey</h3>
+                    <p>From a small idea to a renowned brand, explore how we grew and evolved through the years.</p>
+                </div>
+                <div className="card">
+                    <img src={whyChooseUsImage} alt="Why Choose Us" />
+                    <h3>Why Choose Us</h3>
+                    <p>Exceptional quality, timeless designs, and a commitment to making you look and feel your best.</p>
+                </div>
             </div>
         </section>
     );
