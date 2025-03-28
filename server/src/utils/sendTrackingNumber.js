@@ -13,7 +13,7 @@ const sendTrackingNumber = (name, email, trackingNumber) => {
   });
 
   const mailOptions = {
-    from: '"Fashion House" <support@fashionhouse.com>',
+    from: '"DressMore" <support@fashionhouse.com>',
     to: email,
     subject: "Your order has confirmed",
     text: `
@@ -32,16 +32,16 @@ const sendTrackingNumber = (name, email, trackingNumber) => {
           <body>
             <h3>Order Confirmation</h3>
             <pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
-              {
-                "Customer Name": "${name}",
-                "Email": "${email}",
-                "Tracking Number": "${trackingNumber}"
-              }
+              
+                Customer Name": ${name},
+                Email: ${email},
+                Tracking Number: ${trackingNumber}
+              
             </pre>
-            <p>Thank you for shopping with Fashion House!</p>
+            <p>Thank you for shopping with DressMore</p>
             <p>If you have any questions, feel free to contact us.</p>
             <a href="${process.env.FRONTEND_BASE_URL}/contact">Contact us</a>
-            <p>Thank you for shopping with Fashion House!</p>
+            <p>Thank you for shopping with DressMore</p>
             <p>This is an automated message. Please do not reply.</p>
 
           </body>

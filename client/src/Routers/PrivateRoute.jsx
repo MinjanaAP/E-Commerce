@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { getBaseUrl } from "../utils/baseURL";
 
 const PrivateRoute = ({ children, role }) => {
     const { user } = useSelector((state) => state.auth);
@@ -11,7 +12,7 @@ const PrivateRoute = ({ children, role }) => {
 
     useEffect(() => {
         const axiosInstance = axios.create({
-            baseURL: 'http://localhost:3000',
+            baseURL: `${getBaseUrl()}`,
             headers: {
                 'Content-Type': 'application/json',
             },

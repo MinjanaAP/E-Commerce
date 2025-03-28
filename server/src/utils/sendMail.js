@@ -13,9 +13,9 @@ const sendMail = (name, email, emailToken) => {
   });
 
   const mailOptions = {
-    from: '"Fashion House" <support@fashionhouse.com>',
+    from: '"DressMore" <support@dressmore.com>',
     to: email,
-    subject: "You have successfully registered to  the Fashion House",
+    subject: "You have successfully registered to  the DressMore",
     html: `
       <p>Hello ${name},</p>
       <h3>Thank you for registering.</h3>

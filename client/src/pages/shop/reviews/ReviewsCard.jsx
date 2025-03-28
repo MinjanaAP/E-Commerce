@@ -5,6 +5,7 @@ import RatingStars from '../../../Components/RatingStars';
 import PostAReview from './PostAReview';
 import {useVerifyTokenMutation} from '../../../redux/features/auth/authApi';
 import axios from 'axios';
+import { getBaseUrl } from "../../../utils/baseURL";
 
 const ReviewsCard = ({ productReviews }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,7 @@ const ReviewsCard = ({ productReviews }) => {
 
     useEffect(() => {
         const axiosInstance = axios.create({
-            baseURL: 'http://localhost:3000',
+            baseURL: `${getBaseUrl()}`,
             headers: {
                 'Content-Type': 'application/json',
             },
